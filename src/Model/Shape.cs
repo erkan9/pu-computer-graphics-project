@@ -74,7 +74,6 @@ namespace Draw
 			set { fillColor = value; }
 		}
 
-
 		/// <summary>
 		/// Цвят на елемента.
 		/// </summary>
@@ -102,7 +101,7 @@ namespace Draw
 
 
 		//Method that checks if the Points of Mouse are inside the Circle
-		public virtual bool ContainsEllipse(PointF point)
+		public virtual bool ContainsCircle(PointF point)
 		{
 
 			int offSet = 50;  
@@ -121,6 +120,27 @@ namespace Draw
 			{
 				Console.WriteLine("The cursor is NOT inside the Figure");
 
+				return false;
+			}
+		}
+
+		//Method that checks if the Points of Mouse are inside the Circle
+		public virtual bool ContainsEllipse(PointF point)
+		{
+
+			//(((point.X - offSet) - Rectangle.X) * ((point.X - 50) - Rectangle.X) + ((point.Y - 135) -
+			//Rectangle.Y) *((point.Y - offSet) - Rectangle.Y) <= 40 * 170)
+
+			Console.WriteLine("Clicked Location X={0} Y={1}", point.X, point.Y);
+			Console.WriteLine("Figure Location X={0} Y={1}", Rectangle.X, Rectangle.Y);
+
+			if (((point.X - 75) - Rectangle.X) * ((point.X - 60) - Rectangle.X) + ((point.Y - 100) -
+				Rectangle.Y) * ((point.Y - 100) - Rectangle.Y) <= 40 * 170)
+			{
+				return true;
+			}
+			else
+			{
 				return false;
 			}
 		}

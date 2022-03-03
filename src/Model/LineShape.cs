@@ -46,7 +46,6 @@ namespace Draw
 			base.DrawSelf(grfx);
 
 			grfx.DrawLine(new Pen(StrokeColor), Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
-
 		}
 	}
 }

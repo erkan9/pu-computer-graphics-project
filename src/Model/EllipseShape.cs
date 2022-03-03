@@ -6,27 +6,25 @@ namespace Draw
 	/// <summary>
 	/// Класът правоъгълник е основен примитив, който е наследник на базовия Shape.
 	/// </summary>
-	public class CircleShape : Shape
+	public class EllipseShape : Shape
 	{
 		#region Constructor
 
-		public CircleShape(RectangleF rect) : base(rect)
+		public EllipseShape(RectangleF rect) : base(rect)
 		{
 		}
 
-		public CircleShape(CircleShape rectangle) : base(rectangle)
+		public EllipseShape(CircleShape rectangle) : base(rectangle)
 		{
 		}
 
 		#endregion
 
-	
-
-		//Method that calls ContainsCircle method that checks if "Mouse" points X, Y are inside the figure Cirche
+		//Method that calls containsEllipse method that checks if "Mouse" points X, Y are inside the figure Cirche
 		public override bool Contains(PointF point)
 		{
-			if (base.ContainsCircle(point))
-				
+			if (base.ContainsEllipse(point))
+
 				return true;
 			else
 				return false;

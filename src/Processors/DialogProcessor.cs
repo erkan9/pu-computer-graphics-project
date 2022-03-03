@@ -13,11 +13,13 @@ namespace Draw
 		public DialogProcessor()
 		{
 		}
-		
+
 		#endregion
-		
+
 		#region Properties
-		
+
+		Random rnd = new Random();
+
 		/// <summary>
 		/// Избран елемент.
 		/// </summary>
@@ -53,47 +55,62 @@ namespace Draw
 		/// </summary>
 		public void AddRandomRectangle()
 		{
-			Random rnd = new Random();
-
 			int x = rnd.Next(100,1000);
 			int y = rnd.Next(100,600);
-			
-			RectangleShape rect = new RectangleShape(new Rectangle(x,y,100,200));
 
-			rect.FillColor = Color.White;
+            RectangleShape rect = new RectangleShape(new Rectangle(x, y, 100, 200))
+            {
+                FillColor = Color.White,
 
-			rect.StrokeColor = Color.Black;
+                StrokeColor = Color.Black
+            };
 
-			ShapeList.Add(rect);
+            ShapeList.Add(rect);
+		}
+
+		/// <summary>
+		/// Добавя примитив - Кръг на произволно място върху клиентската област.
+		/// </summary>
+		public void AddCircle()
+		{
+
+            CircleShape circle = new CircleShape(new Rectangle(680, 300, 100, 100))
+            {
+                FillColor = Color.White,
+
+                StrokeColor = Color.Black
+            };
+
+            ShapeList.Add(circle);
 		}
 
 		/// <summary>
 		/// Добавя примитив - Елипса на произволно място върху клиентската област.
 		/// </summary>
-		public void AddRandomCircle()
+		public void AddEllipse()
 		{
-		
-			CircleShape circle = new CircleShape(new Rectangle(680, 300, 100, 100));
 
-			circle.FillColor = Color.White;
+            EllipseShape ellipse = new EllipseShape(new Rectangle(680, 200, 145, 175))
+            {
+                FillColor = Color.White,
 
-			circle.StrokeColor = Color.Black;
-		
-			ShapeList.Add(circle);
+                StrokeColor = Color.Black
+            };
+
+            ShapeList.Add(ellipse);
 		}
 
 		/// <summary>
 		/// Добавя примитив - Елипса на произволно място върху клиентската област.
 		/// </summary>
-		public void addLine()
+		public void AddLine()
 		{
-			Random randomNumber = new Random();
 
-			int x = randomNumber.Next(200, 1000);
-			int y = randomNumber.Next(160, 600);
+            int x = rnd.Next(200, 1000);
+			int y = rnd.Next(160, 600);
 
-			int x2 = randomNumber.Next(250, 1000);
-			int y2 = randomNumber.Next(200, 600);
+			int x2 = rnd.Next(250, 1000);
+			int y2 = rnd.Next(200, 600);
 
 			LineShape line = new LineShape(new Rectangle(x, y,  x2, y2));
 

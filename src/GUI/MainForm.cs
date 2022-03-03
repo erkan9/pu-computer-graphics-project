@@ -11,6 +11,9 @@ namespace Draw
 	/// </summary>
 	public partial class MainForm : Form
 	{
+
+		private Random rnd = new Random();
+
 		/// <summary>
 		/// Агрегирания диалогов процесор във формата улеснява манипулацията на модела.
 		/// </summary>
@@ -50,11 +53,7 @@ namespace Draw
 		/// </summary>
 		void DrawRectangleSpeedButtonClick(object sender, EventArgs e)
 		{
-			dialogProcessor.AddRandomRectangle();
-			
-			statusBar.Items[0].Text = "Последно действие: Рисуване на правоъгълник";
-			
-			viewPort.Invalidate();
+			DrawRectangleOnClick();
 		}
 
 		/// <summary>
@@ -65,12 +64,20 @@ namespace Draw
 		/// </summary>
 		void ViewPortMouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
 		{
-			if (pickUpSpeedButton.Checked) {
+
+			if (pickUpSpeedButton.Checked) 
+
+			{
 				dialogProcessor.Selection = dialogProcessor.ContainsPoint(e.Location);
-				if (dialogProcessor.Selection != null) {
+
+				if (dialogProcessor.Selection != null) 
+				{
 					statusBar.Items[0].Text = "Последно действие: Селекция на примитив";
+
 					dialogProcessor.IsDragging = true;
+
 					dialogProcessor.LastLocation = e.Location;
+
 					viewPort.Invalidate();
 				}
 			}
@@ -101,69 +108,93 @@ namespace Draw
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
 
-			dialogProcessor.AddRandomCircle();
-
-			statusBar.Items[0].Text = "Последно действие: Рисуване на Кръг";
-
-			viewPort.Invalidate();
+			DrawCircleOnClick();
 
 		}
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-			if(colorDialog1.ShowDialog() == DialogResult.OK)
-            {
-				dialogProcessor.Selection.FillColor = colorDialog1.Color;
-
-				viewPort.Invalidate();
-            }
+			ChangeFillColorOfFigure(sender,e);
         }
 
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
-			dialogProcessor.addLine();
+			DrawLineOnClick();
+		}
+
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+			ChangeStrokeColorOfFigure(sender, e);
+		}
+
+        private void цToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			ChangeStrokeColorOfFigure(sender, e);
+		}
+
+        private void ЦвятНаЗапълванеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			ChangeFillColorOfFigure(sender, e);
+		}
+
+        private void СелекцияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ПравоъгълникToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			DrawRectangleOnClick();
+		}
+
+        private void КръгToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			DrawCircleOnClick();
+		}
+
+        private void ЛинияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			DrawLineOnClick();
+		}
+
+        private void елипсаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			DrawEllipseOnClick();
+		}
+
+        private void toolStripButton5_Click_1(object sender, EventArgs e)
+        {
+			DrawEllipseOnClick();
+		}
+
+		private void DrawEllipseOnClick() 
+		{
+			dialogProcessor.AddEllipse();
+
+			statusBar.Items[0].Text = "Последно действие: Рисуване на Елипса";
+
+			viewPort.Invalidate();
+		}
+
+		private void DrawCircleOnClick() 
+		{
+			dialogProcessor.AddCircle();
+
+			statusBar.Items[0].Text = "Последно действие: Рисуване на Кръг";
+
+			viewPort.Invalidate();
+		}
+
+		private void DrawLineOnClick()
+        {
+			dialogProcessor.AddLine();
 
 			statusBar.Items[0].Text = "Последно действие: Рисуване на Линия";
 
 			viewPort.Invalidate();
 		}
 
-        private void toolStripButton4_Click(object sender, EventArgs e)
-        {
-			if (colorDialog1.ShowDialog() == DialogResult.OK)
-			{
-				dialogProcessor.Selection.StrokeColor = colorDialog1.Color;
-
-				viewPort.Invalidate();
-			}
-		}
-
-        private void цToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-			if (colorDialog1.ShowDialog() == DialogResult.OK)
-			{
-				dialogProcessor.Selection.StrokeColor = colorDialog1.Color;
-
-				viewPort.Invalidate();
-			}
-		}
-
-        private void цвятНаЗапълванеToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-			if (colorDialog1.ShowDialog() == DialogResult.OK)
-			{
-				dialogProcessor.Selection.FillColor = colorDialog1.Color;
-
-				viewPort.Invalidate();
-			}
-		}
-
-        private void селекцияToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void правоъгълникToolStripMenuItem_Click(object sender, EventArgs e)
+		private void DrawRectangleOnClick()
         {
 			dialogProcessor.AddRandomRectangle();
 
@@ -172,27 +203,76 @@ namespace Draw
 			viewPort.Invalidate();
 		}
 
-        private void кръгToolStripMenuItem_Click(object sender, EventArgs e)
+		private void ChangeFillColorOfFigure(object sender, EventArgs e)
         {
-			dialogProcessor.AddRandomCircle();
+			if (colorDialog1.ShowDialog() == DialogResult.OK)
+			{
+				dialogProcessor.Selection.FillColor = colorDialog1.Color;
 
-			statusBar.Items[0].Text = "Последно действие: Рисуване на Кръг";
-
-			viewPort.Invalidate();
+				viewPort.Invalidate();
+			}
 		}
 
-        private void линияToolStripMenuItem_Click(object sender, EventArgs e)
+		private void ChangeStrokeColorOfFigure(object sender, EventArgs e)
         {
-			dialogProcessor.addLine();
+			if (colorDialog1.ShowDialog() == DialogResult.OK)
+			{
+				dialogProcessor.Selection.StrokeColor = colorDialog1.Color;
 
-			statusBar.Items[0].Text = "Последно действие: Рисуване на Линия";
-
-			viewPort.Invalidate();
+				viewPort.Invalidate();
+			}
 		}
 
-        private void елипсаToolStripMenuItem_Click(object sender, EventArgs e)
+		private void ChangeFillColorRandomly()
         {
+			Color randomColor = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
 
-        }
-    }
+			dialogProcessor.Selection.FillColor = randomColor;
+		}
+
+		private void ChangeStrokeColorRandomly()
+		{
+			Color randomColor = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+
+			dialogProcessor.Selection.StrokeColor = randomColor;
+		}
+
+        private void случаенЦвятНаЗапълванеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			ChangeFillColorRandomly();
+
+		}
+
+        private void слуаенЦвятНаЛиниитеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			ChangeStrokeColorRandomly();
+		}
+
+        private void случайниЦветовеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			ChangeFillColorRandomly();
+			ChangeStrokeColorRandomly();
+		}
+
+        private void toolStripButton6_Click(object sender, EventArgs e)
+        {
+			ChangeFillColorRandomly();
+			ChangeStrokeColorRandomly();
+		}
+
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			ChangeFillColorOfFigure(sender, e);
+		}
+
+        private void копирайToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			ChangeStrokeColorOfFigure(sender, e);
+		}
+		private void MainForm_Load(object sender, EventArgs e)
+		{
+			
+		}
+	}
 }

@@ -45,8 +45,10 @@ namespace Draw
 		{
 			base.DrawSelf(grfx);
 
+			Pen greenPen = new Pen(Color.FromArgb(255, 0, 255, 0), 10);
+
 			grfx.FillRectangle(new SolidBrush(FillColor),Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
-			grfx.DrawRectangle(new Pen(StrokeColor),Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
+			grfx.DrawRectangle(new Pen(StrokeColor), Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
 
 		}
 	}
