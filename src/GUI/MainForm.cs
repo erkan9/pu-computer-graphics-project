@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Draw
@@ -274,5 +275,68 @@ namespace Draw
 		{
 			
 		}
-	}
+
+        private void уголемиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+			if (dialogProcessor.Selection != null)
+			{
+				dialogProcessor.Selection.Width += 30;
+				dialogProcessor.Selection.Height += 30;
+			}
+		}
+
+        private void toolStripButton7_Click(object sender, EventArgs e)
+        {
+
+			Bitmap bmp = new Bitmap(base.Width, base.Height);	
+			Graphics g = Graphics.FromImage(bmp);
+			Rectangle rect = base.RectangleToScreen(base.ClientRectangle);
+			g.CopyFromScreen(rect.Location, Point.Empty, base.Size);
+			g.Dispose();
+			SaveFileDialog s = new SaveFileDialog();
+			s.Filter = "Png files|*.png|jpeg files|*jpg|bitmaps|*.bmt";
+
+			if (s.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                if (File.Exists(s.FileName))
+                {
+					File.Delete(s.FileName);
+                }
+
+				if(s.FileName.Contains(".jpg"))
+                {
+					bmp.Save(s.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
+                }
+				else if(s.FileName.Contains(".png"))
+                {
+					bmp.Save(s.FileName, System.Drawing.Imaging.ImageFormat.Png);
+				}
+				else if(s.FileName.Contains(".bmp"))
+                {
+					bmp.Save(s.FileName, System.Drawing.Imaging.ImageFormat.Bmp);
+				}
+            }	
+		}
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+			
+        }
+
+        private void намаляванеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			if (dialogProcessor.Selection != null)
+			{
+				dialogProcessor.Selection.Width -= 20;
+				dialogProcessor.Selection.Height -= 20;
+			}
+		}
+
+        private void случайниЦветовеToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+			ChangeFillColorRandomly();
+			ChangeStrokeColorRandomly();
+		}
+    }
 }

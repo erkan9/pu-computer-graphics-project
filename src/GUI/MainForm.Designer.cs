@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace Draw
 {
@@ -42,6 +43,9 @@ namespace Draw
             this.обектToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.цToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.цвятНаЗапълванеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.случаенЦвятНаЗапълванеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.слуаенЦвятНаЛиниитеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.случайниЦветовеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.фигуриToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.селекцияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.правоъгълникToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,15 +62,16 @@ namespace Draw
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
-            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.случаенЦвятНаЗапълванеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.слуаенЦвятНаЛиниитеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.случайниЦветовеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.случайниЦветовеToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.копирайToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.изтрийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.уголемиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.намаляванеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.viewPort = new Draw.DoubleBufferedPanel();
             this.mainMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
@@ -158,6 +163,27 @@ namespace Draw
             this.цвятНаЗапълванеToolStripMenuItem.Text = "Цвят на запълване";
             this.цвятНаЗапълванеToolStripMenuItem.Click += new System.EventHandler(this.ЦвятНаЗапълванеToolStripMenuItem_Click);
             // 
+            // случаенЦвятНаЗапълванеToolStripMenuItem
+            // 
+            this.случаенЦвятНаЗапълванеToolStripMenuItem.Name = "случаенЦвятНаЗапълванеToolStripMenuItem";
+            this.случаенЦвятНаЗапълванеToolStripMenuItem.Size = new System.Drawing.Size(283, 26);
+            this.случаенЦвятНаЗапълванеToolStripMenuItem.Text = "Случаен цвят на запълване";
+            this.случаенЦвятНаЗапълванеToolStripMenuItem.Click += new System.EventHandler(this.случаенЦвятНаЗапълванеToolStripMenuItem_Click);
+            // 
+            // слуаенЦвятНаЛиниитеToolStripMenuItem
+            // 
+            this.слуаенЦвятНаЛиниитеToolStripMenuItem.Name = "слуаенЦвятНаЛиниитеToolStripMenuItem";
+            this.слуаенЦвятНаЛиниитеToolStripMenuItem.Size = new System.Drawing.Size(283, 26);
+            this.слуаенЦвятНаЛиниитеToolStripMenuItem.Text = "Слуаен цвят на линиите";
+            this.слуаенЦвятНаЛиниитеToolStripMenuItem.Click += new System.EventHandler(this.слуаенЦвятНаЛиниитеToolStripMenuItem_Click);
+            // 
+            // случайниЦветовеToolStripMenuItem
+            // 
+            this.случайниЦветовеToolStripMenuItem.Name = "случайниЦветовеToolStripMenuItem";
+            this.случайниЦветовеToolStripMenuItem.Size = new System.Drawing.Size(283, 26);
+            this.случайниЦветовеToolStripMenuItem.Text = "Случайни Цветове";
+            this.случайниЦветовеToolStripMenuItem.Click += new System.EventHandler(this.случайниЦветовеToolStripMenuItem_Click);
+            // 
             // фигуриToolStripMenuItem
             // 
             this.фигуриToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -233,7 +259,8 @@ namespace Draw
             this.toolStripButton3,
             this.toolStripButton4,
             this.toolStripButton5,
-            this.toolStripButton6});
+            this.toolStripButton6,
+            this.toolStripButton7});
             this.speedMenu.Location = new System.Drawing.Point(0, 28);
             this.speedMenu.Name = "speedMenu";
             this.speedMenu.Size = new System.Drawing.Size(924, 27);
@@ -313,27 +340,6 @@ namespace Draw
             this.toolStripButton5.Text = "toolStripButton5";
             this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click_1);
             // 
-            // случаенЦвятНаЗапълванеToolStripMenuItem
-            // 
-            this.случаенЦвятНаЗапълванеToolStripMenuItem.Name = "случаенЦвятНаЗапълванеToolStripMenuItem";
-            this.случаенЦвятНаЗапълванеToolStripMenuItem.Size = new System.Drawing.Size(283, 26);
-            this.случаенЦвятНаЗапълванеToolStripMenuItem.Text = "Случаен цвят на запълване";
-            this.случаенЦвятНаЗапълванеToolStripMenuItem.Click += new System.EventHandler(this.случаенЦвятНаЗапълванеToolStripMenuItem_Click);
-            // 
-            // слуаенЦвятНаЛиниитеToolStripMenuItem
-            // 
-            this.слуаенЦвятНаЛиниитеToolStripMenuItem.Name = "слуаенЦвятНаЛиниитеToolStripMenuItem";
-            this.слуаенЦвятНаЛиниитеToolStripMenuItem.Size = new System.Drawing.Size(283, 26);
-            this.слуаенЦвятНаЛиниитеToolStripMenuItem.Text = "Слуаен цвят на линиите";
-            this.слуаенЦвятНаЛиниитеToolStripMenuItem.Click += new System.EventHandler(this.слуаенЦвятНаЛиниитеToolStripMenuItem_Click);
-            // 
-            // случайниЦветовеToolStripMenuItem
-            // 
-            this.случайниЦветовеToolStripMenuItem.Name = "случайниЦветовеToolStripMenuItem";
-            this.случайниЦветовеToolStripMenuItem.Size = new System.Drawing.Size(283, 26);
-            this.случайниЦветовеToolStripMenuItem.Text = "Случайни Цветове";
-            this.случайниЦветовеToolStripMenuItem.Click += new System.EventHandler(this.случайниЦветовеToolStripMenuItem_Click);
-            // 
             // toolStripButton6
             // 
             this.toolStripButton6.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -345,15 +351,34 @@ namespace Draw
             this.toolStripButton6.Text = "toolStripButton6";
             this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click);
             // 
+            // toolStripButton7
+            // 
+            this.toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton7.Image")));
+            this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton7.Name = "toolStripButton7";
+            this.toolStripButton7.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButton7.Text = "toolStripButton7";
+            this.toolStripButton7.Click += new System.EventHandler(this.toolStripButton7_Click);
+            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.случайниЦветовеToolStripMenuItem1,
             this.deleteToolStripMenuItem,
             this.копирайToolStripMenuItem,
-            this.изтрийToolStripMenuItem});
+            this.уголемиToolStripMenuItem,
+            this.намаляванеToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(211, 108);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(211, 124);
+            // 
+            // случайниЦветовеToolStripMenuItem1
+            // 
+            this.случайниЦветовеToolStripMenuItem1.Name = "случайниЦветовеToolStripMenuItem1";
+            this.случайниЦветовеToolStripMenuItem1.Size = new System.Drawing.Size(210, 24);
+            this.случайниЦветовеToolStripMenuItem1.Text = "Случайни цветове";
+            this.случайниЦветовеToolStripMenuItem1.Click += new System.EventHandler(this.случайниЦветовеToolStripMenuItem1_Click);
             // 
             // deleteToolStripMenuItem
             // 
@@ -369,11 +394,19 @@ namespace Draw
             this.копирайToolStripMenuItem.Text = "Цвят на линиите";
             this.копирайToolStripMenuItem.Click += new System.EventHandler(this.копирайToolStripMenuItem_Click);
             // 
-            // изтрийToolStripMenuItem
+            // уголемиToolStripMenuItem
             // 
-            this.изтрийToolStripMenuItem.Name = "изтрийToolStripMenuItem";
-            this.изтрийToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
-            this.изтрийToolStripMenuItem.Text = "Изтрий";
+            this.уголемиToolStripMenuItem.Name = "уголемиToolStripMenuItem";
+            this.уголемиToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.уголемиToolStripMenuItem.Text = "Уголеми";
+            this.уголемиToolStripMenuItem.Click += new System.EventHandler(this.уголемиToolStripMenuItem_Click);
+            // 
+            // намаляванеToolStripMenuItem
+            // 
+            this.намаляванеToolStripMenuItem.Name = "намаляванеToolStripMenuItem";
+            this.намаляванеToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.намаляванеToolStripMenuItem.Text = "Намаляване";
+            this.намаляванеToolStripMenuItem.Click += new System.EventHandler(this.намаляванеToolStripMenuItem_Click);
             // 
             // viewPort
             // 
@@ -384,6 +417,7 @@ namespace Draw
             this.viewPort.Name = "viewPort";
             this.viewPort.Size = new System.Drawing.Size(924, 444);
             this.viewPort.TabIndex = 4;
+            this.viewPort.Load += new System.EventHandler(this.viewPort_Load);
             this.viewPort.Paint += new System.Windows.Forms.PaintEventHandler(this.ViewPortPaint);
             this.viewPort.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseDown);
             this.viewPort.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseMove);
@@ -417,6 +451,11 @@ namespace Draw
             this.PerformLayout();
 
 		}
+
+        private void viewPort_Load(object sender, EventArgs e)
+        {
+           // throw new NotImplementedException();
+        }
 
         private void toolStripButton5_Click(object sender, EventArgs e)
         {
@@ -459,6 +498,10 @@ namespace Draw
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem копирайToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem изтрийToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem уголемиToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton toolStripButton7;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.ToolStripMenuItem намаляванеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem случайниЦветовеToolStripMenuItem1;
     }
 }
