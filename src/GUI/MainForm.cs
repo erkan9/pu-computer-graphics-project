@@ -391,11 +391,12 @@ namespace Draw
 
         private void toolStripButton8_Click(object sender, EventArgs e)
         {
-			OpenFileDialog o = new OpenFileDialog();
+            OpenFileDialog o = new OpenFileDialog
+            {
+                Filter = "Png files|*.png|jpeg files|*jpg|bitmaps|*.bmp"
+            };
 
-			o.Filter = "Png files|*.png|jpeg files|*jpg|bitmaps|*.bmp"; 
-
-			if(o.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (o.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 base.BackgroundImage = (Image)Image.FromFile(o.FileName).Clone();
             }
