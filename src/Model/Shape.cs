@@ -25,7 +25,9 @@ namespace Draw
 			this.Width = shape.Width;
 			this.Location = shape.Location;
 			this.rectangle = shape.rectangle;
-			
+
+			this.Name = shape.Name;
+
 			this.FillColor =  shape.FillColor;
 		}
 		#endregion
@@ -35,8 +37,11 @@ namespace Draw
 		/// <summary>
 		/// Обхващащ правоъгълник на елемента.
 		/// </summary>
-		private RectangleF rectangle;		
-		public virtual RectangleF Rectangle {
+		private RectangleF rectangle;
+
+        public virtual string Name { get; set; }
+
+        public virtual RectangleF Rectangle {
 			get { return rectangle; }
 			set { rectangle = value; }
 		}
@@ -56,7 +61,7 @@ namespace Draw
 			get { return Rectangle.Height; }
 			set { rectangle.Height = value; }
 		}
-		
+
 		/// <summary>
 		/// Горен ляв ъгъл на елемента.
 		/// </summary>

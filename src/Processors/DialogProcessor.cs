@@ -58,9 +58,11 @@ namespace Draw
 			int x = rnd.Next(100,1000);
 			int y = rnd.Next(100,600);
 
-            RectangleShape rect = new RectangleShape(new Rectangle(x, y, 100, 200))
-            {
-                FillColor = Color.White,
+			RectangleShape rect = new RectangleShape(new Rectangle(x, y, 100, 200))
+			{
+				FillColor = Color.White,
+
+				Name = null,
 
                 StrokeColor = Color.Black
             };
@@ -68,8 +70,23 @@ namespace Draw
             ShapeList.Add(rect);
 		}
 
+		public void ChangeColorByFigureName(string figureName, Color color)
+		{
+			foreach (var Shape in ShapeList)
+			{
+				if(Shape.Name.Equals(figureName))
+                {
+					Shape.FillColor = color;
+                }
+				else
+                {
+					Console.WriteLine("There is not a figure with that name");
+                }
+			}
+		}
+
 		public void CopyAndAddRectangle(int widthOfCopiedFigure, int heightOfCopiedFigure, 
-			Color fillColorOfCopiedFigure, Color strokeColorOfCopiedFigure)
+			Color fillColorOfCopiedFigure, Color strokeColorOfCopiedFigure, string name)
 		{
 			int x = rnd.Next(100, 1000);
 			int y = rnd.Next(100, 600);
@@ -78,10 +95,48 @@ namespace Draw
 			{
 				FillColor = fillColorOfCopiedFigure,
 
+				Name = name,
+
 				StrokeColor = strokeColorOfCopiedFigure
 			};
 
 			ShapeList.Add(rect);
+		}
+
+		public void CopyAndAddCircle(int widthOfCopiedFigure, int heightOfCopiedFigure,
+			Color fillColorOfCopiedFigure, Color strokeColorOfCopiedFigure, string name)
+		{
+			int x = rnd.Next(100, 1000);
+			int y = rnd.Next(100, 600);
+
+			EllipseShape ellipse = new EllipseShape(new Rectangle(x, y, widthOfCopiedFigure, heightOfCopiedFigure))
+			{
+				FillColor = fillColorOfCopiedFigure,
+
+				Name = name,
+
+				StrokeColor = strokeColorOfCopiedFigure
+			};
+
+			ShapeList.Add(ellipse);
+		}
+
+		public void CopyAndAddEllipse(int widthOfCopiedFigure, int heightOfCopiedFigure,
+			Color fillColorOfCopiedFigure, Color strokeColorOfCopiedFigure, string name)
+		{
+			int x = rnd.Next(100, 1000);
+			int y = rnd.Next(100, 600);
+
+			CircleShape circ = new CircleShape(new Rectangle(x, y, widthOfCopiedFigure, heightOfCopiedFigure))
+			{
+				FillColor = fillColorOfCopiedFigure,
+
+				Name = name,
+
+				StrokeColor = strokeColorOfCopiedFigure
+			};
+
+			ShapeList.Add(circ);
 		}
 
 		/// <summary>
@@ -94,7 +149,9 @@ namespace Draw
             {
                 FillColor = Color.White,
 
-                StrokeColor = Color.Black
+				Name = null,
+
+				StrokeColor = Color.Black
             };
 
             ShapeList.Add(circle);
@@ -110,7 +167,9 @@ namespace Draw
             {
                 FillColor = Color.White,
 
-                StrokeColor = Color.Black
+				Name = null,
+
+				StrokeColor = Color.Black
             };
 
             ShapeList.Add(ellipse);

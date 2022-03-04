@@ -521,10 +521,11 @@ namespace Draw
 			int heightOfCopiedFigure = (int)dialogProcessor.Selection.Height;
 			Color fillColorOfCopiedFigure = dialogProcessor.Selection.FillColor;
 			Color strokeColorOfCopiedFigure = dialogProcessor.Selection.StrokeColor;
+			string name = dialogProcessor.Selection.Name;
 
-			dialogProcessor.CopyAndAddRectangle(widthOfCopiedFigure, heightOfCopiedFigure, fillColorOfCopiedFigure, strokeColorOfCopiedFigure);
+			dialogProcessor.CopyAndAddRectangle(widthOfCopiedFigure, heightOfCopiedFigure, fillColorOfCopiedFigure, strokeColorOfCopiedFigure, name);
 
-			statusBar.Items[0].Text = "Последно действие: Рисуване на правоъгълник";
+			statusBar.Items[0].Text = "Последно действие: Копирано като правоъгълник";
 
 			viewPort.Invalidate();
 
@@ -536,5 +537,83 @@ namespace Draw
 			копиранеНаПравоъгълникToolStripMenuItem_Click(sender, e);
 
 		}
-    }
+
+
+        private void копиранеКатоКръгToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			int widthOfCopiedFigure = (int)dialogProcessor.Selection.Width;
+			int heightOfCopiedFigure = (int)dialogProcessor.Selection.Height;
+			Color fillColorOfCopiedFigure = dialogProcessor.Selection.FillColor;
+			Color strokeColorOfCopiedFigure = dialogProcessor.Selection.StrokeColor;
+			string name = dialogProcessor.Selection.Name;
+
+			dialogProcessor.CopyAndAddCircle(widthOfCopiedFigure, heightOfCopiedFigure, fillColorOfCopiedFigure, strokeColorOfCopiedFigure, name);
+
+			statusBar.Items[0].Text = "Последно действие: копирано като Кръг";
+
+			viewPort.Invalidate();
+
+			base.Refresh();
+		}
+
+        private void копирайКатоКръгToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			копиранеКатоКръгToolStripMenuItem_Click(sender, e);
+		}
+
+        private void копиранеКатоЕлипсаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			int widthOfCopiedFigure = (int)dialogProcessor.Selection.Width;
+			int heightOfCopiedFigure = (int)dialogProcessor.Selection.Height;
+			Color fillColorOfCopiedFigure = dialogProcessor.Selection.FillColor;
+			Color strokeColorOfCopiedFigure = dialogProcessor.Selection.StrokeColor;
+			string name = dialogProcessor.Selection.Name;
+
+			dialogProcessor.CopyAndAddEllipse(widthOfCopiedFigure, heightOfCopiedFigure, fillColorOfCopiedFigure, strokeColorOfCopiedFigure, name);
+
+			statusBar.Items[0].Text = "Последно действие: копирано като Елипса";
+
+			viewPort.Invalidate();
+
+			base.Refresh();
+		}
+
+        private void копирайКатоЕлипсаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			копиранеКатоЕлипсаToolStripMenuItem_Click(sender, e);
+
+		}
+
+        private void toolStripTextBox1_Click(object sender, EventArgs e)
+        {
+		
+		}
+
+        private void toolStripTextBox2_Click(object sender, EventArgs e)
+        {
+            string figureName = toolStripTextBox2.Text;
+
+			string input = null;
+
+			Color color = Color.White;
+
+			input = toolStripTextBox1.Text;
+
+			color = Color.FromName(input);
+
+			dialogProcessor.ChangeColorByFigureName(figureName, color);
+
+			base.Refresh();
+		}
+
+        private void именуванеНаФигуратаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			string input = именуванеНаФигуратаToolStripMenuItem.Text;
+
+			dialogProcessor.Selection.Name = input;
+
+			statusBar.Items[0].Text = "Името на фигурата бе променена на:" + input;
+
+		}
+	}
 }
