@@ -141,7 +141,7 @@ namespace Draw
         private void СелекцияToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-        }
+		}
 
         private void ПравоъгълникToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -202,6 +202,8 @@ namespace Draw
 			statusBar.Items[0].Text = "Последно действие: Рисуване на правоъгълник";
 
 			viewPort.Invalidate();
+
+			base.Refresh();
 		}
 
 		private void ChangeFillColorOfFigure(object sender, EventArgs e)
@@ -210,8 +212,11 @@ namespace Draw
 			{
 				dialogProcessor.Selection.FillColor = colorDialog1.Color;
 
+				statusBar.Items[0].Text = "Последно действие: Цвета на фигурата е сменена";
+
 				viewPort.Invalidate();
 			}
+			base.Refresh();
 		}
 
 		private void ChangeStrokeColorOfFigure(object sender, EventArgs e)
@@ -220,25 +225,44 @@ namespace Draw
 			{
 				dialogProcessor.Selection.StrokeColor = colorDialog1.Color;
 
+				statusBar.Items[0].Text = "Последно действие: Цвета на лиините на фигурата е сменена";
+
 				viewPort.Invalidate();
 			}
+			base.Refresh();
 		}
 
 		private void ChangeFillColorRandomly()
         {
 			Color randomColor = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
 
+			statusBar.Items[0].Text = "Последно действие: Цвета на фигурата е сменена случайно";
+
 			dialogProcessor.Selection.FillColor = randomColor;
+
+			base.Refresh();
 		}
 
 		private void ChangeStrokeColorRandomly()
 		{
 			Color randomColor = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
 
+			statusBar.Items[0].Text = "Последно действие: Цвета на лиините на фигурата е случайно";
+
 			dialogProcessor.Selection.StrokeColor = randomColor;
+
+			base.Refresh();
 		}
 
-        private void случаенЦвятНаЗапълванеToolStripMenuItem_Click(object sender, EventArgs e)
+		public void DeleteFigure()
+		{
+			dialogProcessor.Selection.Width = 0;
+			dialogProcessor.Selection.Height = 0;
+
+			base.Refresh();
+		}
+
+		private void случаенЦвятНаЗапълванеToolStripMenuItem_Click(object sender, EventArgs e)
         {
 			ChangeFillColorRandomly();
 
@@ -278,7 +302,7 @@ namespace Draw
 
         private void уголемиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-		dialogProcessor.MakeFigureBigger();
+		   MakeFigureBigger();
 		}
 
 		//Save button
@@ -318,7 +342,8 @@ namespace Draw
                 {
 					bitmap.Save(saveFileDialog.FileName, System.Drawing.Imaging.ImageFormat.Bmp);
 				}
-            }	
+            }
+			statusBar.Items[0].Text = "Последно действие: Запис на изображение";
 		}
 
 		private void pictureBox1_Click(object sender, EventArgs e)
@@ -326,9 +351,29 @@ namespace Draw
 			
         }
 
-        private void намаляванеToolStripMenuItem_Click(object sender, EventArgs e)
+		private void MakeFigureBigger()
+		{
+			if (dialogProcessor.Selection != null)
+			{
+				dialogProcessor.Selection.Width += 30;
+				dialogProcessor.Selection.Height += 30;
+			}
+			base.Refresh();
+		}
+
+		private void MakeFigureSmaller()
+		{
+			if (dialogProcessor.Selection != null)
+			{
+				dialogProcessor.Selection.Width -= 20;
+				dialogProcessor.Selection.Height -= 20;
+			}
+			base.Refresh();
+		}
+
+		private void намаляванеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-			dialogProcessor.MakeFigureSmaller();
+			MakeFigureSmaller();
 		}
 
         private void случайниЦветовеToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -339,22 +384,22 @@ namespace Draw
 
         private void уголемяванеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-			dialogProcessor.MakeFigureBigger();
+			MakeFigureBigger();
 		}
 
         private void намаляванеToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-			dialogProcessor.MakeFigureSmaller();
+			MakeFigureSmaller();
 		}
 
         private void изтриванеToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-			dialogProcessor.DeleteFigure();	
+			DeleteFigure();	
         }
 
         private void изтриванеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-			dialogProcessor.DeleteFigure();
+			DeleteFigure();
 		}
 
         private void запишиКатоToolStripMenuItem_Click(object sender, EventArgs e)
@@ -387,28 +432,28 @@ namespace Draw
 
 				bitmap.Save(saveFileDialog.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
 			}
+
+			statusBar.Items[0].Text = "Последно действие: Запис на изображение като .PNG";
 		}
 
 		//Method that Reads and opens a file and uses it as a background
         private void toolStripButton8_Click(object sender, EventArgs e)
         {
-            OpenFileDialog o = new OpenFileDialog
+            OpenFileDialog openFileDialog = new OpenFileDialog
             {
                 Filter = "Png files|*.png|jpeg files|*jpg|bitmaps|*.bmp"
             };
 
-            if (o.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                base.BackgroundImage = (Image)Image.FromFile(o.FileName).Clone();
+                base.BackgroundImage = (Image)Image.FromFile(openFileDialog.FileName).Clone();
             }
+
+			statusBar.Items[0].Text = "Последно действие: Отвори/Прочети изображение";
+
 			base.Refresh();
-
 		}
 
-        private void toolStripButton9_Click(object sender, EventArgs e)
-        {
-			
-		}
 
         private void отвориToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -418,11 +463,77 @@ namespace Draw
         private void транспарантноЗапълванеToolStripMenuItem_Click(object sender, EventArgs e)
         {
 			dialogProcessor.Selection.FillColor = base.BackColor;
+
+			base.Refresh();
 		}
 
         private void транспаратноЗапълванеToolStripMenuItem_Click(object sender, EventArgs e)
         {
 			транспарантноЗапълванеToolStripMenuItem_Click(sender, e);
+		}
+
+        private void завъртанеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+			float figureWidth = dialogProcessor.Selection.Width;
+			float figureHeight = dialogProcessor.Selection.Height;
+
+			dialogProcessor.Selection.Width = figureHeight;
+			dialogProcessor.Selection.Height = figureWidth;
+
+			statusBar.Items[0].Text = "Последно действие: Завъртане на фигура";
+
+			base.Refresh();
+		}
+
+        private void завъртанеToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+			завъртанеToolStripMenuItem_Click(sender, e);
+
+		}
+
+        private void toolStripButton9_Click(object sender, EventArgs e)
+        {
+			запишиToolStripMenuItem_Click(sender, e);
+
+		}
+
+        private void новToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			if (colorDialog1.ShowDialog() == DialogResult.OK)
+			{
+				base.BackColor = colorDialog1.Color;
+
+				viewPort.Invalidate();
+			}
+			statusBar.Items[0].Text = "Последно действие: Цвета фона беше сменен";
+		}
+
+        private void pickUpSpeedButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void копиранеНаПравоъгълникToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+			int widthOfCopiedFigure = (int)dialogProcessor.Selection.Width;
+			int heightOfCopiedFigure = (int)dialogProcessor.Selection.Height;
+			Color fillColorOfCopiedFigure = dialogProcessor.Selection.FillColor;
+			Color strokeColorOfCopiedFigure = dialogProcessor.Selection.StrokeColor;
+
+			dialogProcessor.CopyAndAddRectangle(widthOfCopiedFigure, heightOfCopiedFigure, fillColorOfCopiedFigure, strokeColorOfCopiedFigure);
+
+			statusBar.Items[0].Text = "Последно действие: Рисуване на правоъгълник";
+
+			viewPort.Invalidate();
+
+			base.Refresh();
+		}
+
+        private void копирайПравоъгълникToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			копиранеНаПравоъгълникToolStripMenuItem_Click(sender, e);
 
 		}
     }

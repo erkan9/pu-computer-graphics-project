@@ -68,22 +68,20 @@ namespace Draw
             ShapeList.Add(rect);
 		}
 
-		public void MakeFigureBigger()
+		public void CopyAndAddRectangle(int widthOfCopiedFigure, int heightOfCopiedFigure, 
+			Color fillColorOfCopiedFigure, Color strokeColorOfCopiedFigure)
 		{
-			if (Selection != null)
-			{
-				Selection.Width += 30;
-				Selection.Height += 30;
-			}
-		}
+			int x = rnd.Next(100, 1000);
+			int y = rnd.Next(100, 600);
 
-		public void MakeFigureSmaller()
-		{
-			if (Selection != null)
+			RectangleShape rect = new RectangleShape(new Rectangle(x, y, widthOfCopiedFigure, heightOfCopiedFigure))
 			{
-				Selection.Width -= 20;
-				Selection.Height -= 20;
-			}
+				FillColor = fillColorOfCopiedFigure,
+
+				StrokeColor = strokeColorOfCopiedFigure
+			};
+
+			ShapeList.Add(rect);
 		}
 
 		/// <summary>
@@ -116,12 +114,6 @@ namespace Draw
             };
 
             ShapeList.Add(ellipse);
-		}
-
-		public void DeleteFigure ()
-        {
-			Selection.Width = 0;
-			Selection.Height = 0;
 		}
 
 		/// <summary>
