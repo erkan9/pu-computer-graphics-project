@@ -389,6 +389,7 @@ namespace Draw
 			}
 		}
 
+		//Method that Reads and opens a file and uses it as a background
         private void toolStripButton8_Click(object sender, EventArgs e)
         {
             OpenFileDialog o = new OpenFileDialog
