@@ -278,66 +278,150 @@ namespace Draw
 
         private void уголемиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-			if (dialogProcessor.Selection != null)
-			{
-				dialogProcessor.Selection.Width += 30;
-				dialogProcessor.Selection.Height += 30;
-			}
+		dialogProcessor.MakeFigureBigger();
 		}
 
 		//Save button
         private void toolStripButton7_Click(object sender, EventArgs e)
         {
 
-			Bitmap bmp = new Bitmap(base.Width, base.Height);	
-			Graphics g = Graphics.FromImage(bmp);
-			Rectangle rect = base.RectangleToScreen(base.ClientRectangle);
-			g.CopyFromScreen(rect.Location, Point.Empty, base.Size);
-			g.Dispose();
-			SaveFileDialog s = new SaveFileDialog();
-			s.Filter = "Png files|*.png|jpeg files|*jpg|bitmaps|*.bmt";
+			Bitmap bitmap = new Bitmap(base.Width, base.Height);
+			
+			Graphics graphics = Graphics.FromImage(bitmap);
 
-			if (s.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+			Rectangle rectangle = base.RectangleToScreen(base.ClientRectangle);
+
+			graphics.CopyFromScreen(rectangle.Location, Point.Empty, base.Size);
+
+			graphics.Dispose();
+
+			SaveFileDialog saveFileDialog = new SaveFileDialog();
+
+			saveFileDialog.Filter = "Png files|*.png|jpeg files|*jpg|bitmaps|*.bmp";
+
+			if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                if (File.Exists(s.FileName))
+                if (File.Exists(saveFileDialog.FileName))
                 {
-					File.Delete(s.FileName);
+					File.Delete(saveFileDialog.FileName);
                 }
 
-				if(s.FileName.Contains(".jpg"))
+				if(saveFileDialog.FileName.Contains(".jpg"))
                 {
-					bmp.Save(s.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
+					bitmap.Save(saveFileDialog.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
                 }
-				else if(s.FileName.Contains(".png"))
+				else if(saveFileDialog.FileName.Contains(".png"))
                 {
-					bmp.Save(s.FileName, System.Drawing.Imaging.ImageFormat.Png);
+					bitmap.Save(saveFileDialog.FileName, System.Drawing.Imaging.ImageFormat.Png);
 				}
-				else if(s.FileName.Contains(".bmp"))
+				else if(saveFileDialog.FileName.Contains(".bitmap"))
                 {
-					bmp.Save(s.FileName, System.Drawing.Imaging.ImageFormat.Bmp);
+					bitmap.Save(saveFileDialog.FileName, System.Drawing.Imaging.ImageFormat.Bmp);
 				}
             }	
 		}
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+		private void pictureBox1_Click(object sender, EventArgs e)
         {
 			
         }
 
         private void намаляванеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-			if (dialogProcessor.Selection != null)
-			{
-				dialogProcessor.Selection.Width -= 20;
-				dialogProcessor.Selection.Height -= 20;
-			}
+			dialogProcessor.MakeFigureSmaller();
 		}
 
         private void случайниЦветовеToolStripMenuItem1_Click(object sender, EventArgs e)
         {
 			ChangeFillColorRandomly();
 			ChangeStrokeColorRandomly();
+		}
+
+        private void уголемяванеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			dialogProcessor.MakeFigureBigger();
+		}
+
+        private void намаляванеToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+			dialogProcessor.MakeFigureSmaller();
+		}
+
+        private void изтриванеToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+			dialogProcessor.DeleteFigure();	
+        }
+
+        private void изтриванеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			dialogProcessor.DeleteFigure();
+		}
+
+        private void запишиКатоToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			toolStripButton7_Click(sender, e);
+		}
+
+		private void запишиToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Bitmap bitmap = new Bitmap(base.Width, base.Height);
+
+			Graphics graphics = Graphics.FromImage(bitmap);
+
+			Rectangle rectangle = base.RectangleToScreen(base.ClientRectangle);
+
+			graphics.CopyFromScreen(rectangle.Location, Point.Empty, base.Size);
+
+			graphics.Dispose();
+
+			SaveFileDialog saveFileDialog = new SaveFileDialog();
+
+			saveFileDialog.Filter = "|*.png";
+
+			if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+			{
+				if (File.Exists(saveFileDialog.FileName))
+				{
+					File.Delete(saveFileDialog.FileName);
+				}
+
+				bitmap.Save(saveFileDialog.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
+			}
+		}
+
+        private void toolStripButton8_Click(object sender, EventArgs e)
+        {
+			OpenFileDialog o = new OpenFileDialog();
+
+			o.Filter = "Png files|*.png|jpeg files|*jpg|bitmaps|*.bmp"; 
+
+			if(o.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                base.BackgroundImage = (Image)Image.FromFile(o.FileName).Clone();
+            }
+			base.Refresh();
+
+		}
+
+        private void toolStripButton9_Click(object sender, EventArgs e)
+        {
+			
+		}
+
+        private void отвориToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			toolStripButton8_Click(sender, e);
+		}
+
+        private void транспарантноЗапълванеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			dialogProcessor.Selection.FillColor = base.BackColor;
+		}
+
+        private void транспаратноЗапълванеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			транспарантноЗапълванеToolStripMenuItem_Click(sender, e);
+
 		}
     }
 }

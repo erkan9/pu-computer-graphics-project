@@ -68,6 +68,24 @@ namespace Draw
             ShapeList.Add(rect);
 		}
 
+		public void MakeFigureBigger()
+		{
+			if (Selection != null)
+			{
+				Selection.Width += 30;
+				Selection.Height += 30;
+			}
+		}
+
+		public void MakeFigureSmaller()
+		{
+			if (Selection != null)
+			{
+				Selection.Width -= 20;
+				Selection.Height -= 20;
+			}
+		}
+
 		/// <summary>
 		/// Добавя примитив - Кръг на произволно място върху клиентската област.
 		/// </summary>
@@ -98,6 +116,12 @@ namespace Draw
             };
 
             ShapeList.Add(ellipse);
+		}
+
+		public void DeleteFigure ()
+        {
+			Selection.Width = 0;
+			Selection.Height = 0;
 		}
 
 		/// <summary>
