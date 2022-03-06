@@ -256,8 +256,8 @@ namespace Draw
 
 		public void DeleteFigure()
 		{
-			dialogProcessor.Selection.Width = 0;
-			dialogProcessor.Selection.Height = 0;
+
+			dialogProcessor.ShapeList.Remove(dialogProcessor.Selection);
 
 			base.Refresh();
 		}
@@ -717,5 +717,38 @@ namespace Draw
         {
 			dialogProcessor.Selection.Group = " ";
         }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			System.Diagnostics.Process.Start("https://github.com/erkan9/pu-computer-graphics-project");
+		}
+
+        private void завъртанеНаГрупаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+			string groupName = завъртанеНаГрупаToolStripMenuItem.Text;
+
+			dialogProcessor.RotateByGroupName(groupName);
+
+			base.Invalidate();
+		}
+
+        private void увеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			string groupName = групаToolStripMenuItem.Text;
+
+			dialogProcessor.MakeBiggerByGroupName(groupName);
+
+			base.Invalidate();
+		}
+
+        private void намаляванеToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+			string groupName = групаToolStripMenuItem.Text;
+
+			dialogProcessor.MakeSMallerByGroupName(groupName);
+
+			base.Invalidate();
+		}
     }
 }

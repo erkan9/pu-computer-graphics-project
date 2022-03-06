@@ -102,7 +102,7 @@ namespace Draw
 			{
 				FillColor = Color.White,
 
-				Name = null,
+				Name = "Rectangle",
 
 				Group = "A",
 
@@ -124,7 +124,7 @@ namespace Draw
 			{
 				FillColor = Color.White,
 
-				Name = null,
+				Name = "Rectangle",
 
 				Group = "A",
 
@@ -254,6 +254,45 @@ namespace Draw
 			return false;
         }
 
+		public void MakeBiggerByGroupName(string groupName)
+		{
+			foreach (Shape shape in ShapeList)
+			{
+				if (shape.Group.Equals(groupName))
+				{
+					shape.Width += 50;
+					shape.Height += 50;
+				}
+			}
+		}
+
+		public void MakeSMallerByGroupName(string groupName)
+		{
+			foreach (Shape shape in ShapeList)
+			{
+				if (shape.Group.Equals(groupName))
+				{
+					shape.Width -= 50;
+					shape.Height -= 50;
+				}
+			}
+		}
+
+		public void RotateByGroupName(string groupName)
+        {
+			foreach (Shape shape in ShapeList)
+			{
+				if (shape.Group.Equals(groupName))
+				{
+					float figureWidth = shape.Width;
+					float figureHeight = shape.Height;
+
+					shape.Width = figureHeight;
+					shape.Height = figureWidth;
+				}
+			}
+		}
+
 		/// <summary>
 		/// Добавя примитив - Кръг на произволно място върху клиентската област.
 		/// </summary>
@@ -264,7 +303,7 @@ namespace Draw
             {
                 FillColor = Color.White,
 
-				Name = null,
+				Name = "Circle",
 
 				Group = "B",
 
@@ -284,7 +323,7 @@ namespace Draw
             {
                 FillColor = Color.White,
 
-				Name = null,
+				Name = "Ellipse",
 
 				Group = "B",
 
@@ -310,9 +349,9 @@ namespace Draw
             {
                 FillColor = Color.White,
 
-				Name = null,
+				Name = "Line",
 
-				Group = null,
+				Group = "A",
 
 				StrokeColor = Color.Black
             };
