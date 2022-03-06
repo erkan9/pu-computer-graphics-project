@@ -266,6 +266,17 @@ namespace Draw
 			}
 		}
 
+		public void DeleteGroup(string groupName)
+		{
+			foreach (Shape shape in ShapeList)
+			{
+				if (shape.Group.Equals(groupName))
+				{
+					shape.Group = "no";
+				}
+			}
+		}
+
 		public void MakeSMallerByGroupName(string groupName)
 		{
 			foreach (Shape shape in ShapeList)

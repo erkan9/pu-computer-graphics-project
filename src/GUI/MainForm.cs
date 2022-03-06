@@ -615,11 +615,6 @@ namespace Draw
 
         private void именуванеНаФигуратаToolStripMenuItem_Click(object sender, EventArgs e)
         {
-			string input = именуванеНаФигуратаToolStripMenuItem.Text;
-
-			dialogProcessor.Selection.Name = input;
-
-			statusBar.Items[0].Text = "Името на фигурата бе променена на: " + input;
 
 		}
 
@@ -674,9 +669,7 @@ namespace Draw
 
         private void промениГрупатаToolStripMenuItem_Click(object sender, EventArgs e)
         {
-			dialogProcessor.Selection.Group = промениГрупатаToolStripMenuItem.Text;
 
-			statusBar.Items[0].Text = "Последно действие: Групата на фигурата е променена на: " + промениГрупатаToolStripMenuItem.Text;
 		}
 
         private void смениЦветаНаГрупаRToolStripMenuItem_Click(object sender, EventArgs e)
@@ -703,14 +696,6 @@ namespace Draw
 
         private void смениЦветаНаДругаГрупаToolStripMenuItem_Click(object sender, EventArgs e)
         {
-			string newGroup = смениЦветаНаДругаГрупаToolStripMenuItem.Text;
-
-			if (colorDialog1.ShowDialog() == DialogResult.OK)
-			{
-				Color color = colorDialog1.Color;
-				dialogProcessor.ChangeColorOfNewGroup(color, newGroup);
-			}
-			base.Invalidate();
 		}
 
         private void премахниОтГрупатаToolStripMenuItem_Click(object sender, EventArgs e)
@@ -726,11 +711,6 @@ namespace Draw
         private void завъртанеНаГрупаToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-			string groupName = завъртанеНаГрупаToolStripMenuItem.Text;
-
-			dialogProcessor.RotateByGroupName(groupName);
-
-			base.Invalidate();
 		}
 
         private void увеToolStripMenuItem_Click(object sender, EventArgs e)
@@ -748,6 +728,60 @@ namespace Draw
 
 			dialogProcessor.MakeSMallerByGroupName(groupName);
 
+			base.Invalidate();
+		}
+
+        private void групаToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+			string groupName = групаToolStripMenuItem1.Text;
+			dialogProcessor.DeleteGroup(groupName);
+			base.Invalidate();
+		}
+
+        private void изтриванеНаГрупаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void групаToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+			dialogProcessor.Selection.Group = групаToolStripMenuItem2.Text;
+
+			statusBar.Items[0].Text = "Последно действие: Групата на фигурата е променена на: " + групаToolStripMenuItem2;
+		}
+
+        private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
+
+        private void имеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			string input = имеToolStripMenuItem.Text;
+
+			dialogProcessor.Selection.Name = input;
+
+			statusBar.Items[0].Text = "Името на фигурата бе променена на: " + input;
+		}
+
+        private void групаToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+			string groupName = групаToolStripMenuItem3.Text;
+
+			dialogProcessor.RotateByGroupName(groupName);
+
+			base.Invalidate();
+		}
+
+        private void групаToolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+			string newGroup = групаToolStripMenuItem4.Text;
+
+			if (colorDialog1.ShowDialog() == DialogResult.OK)
+			{
+				Color color = colorDialog1.Color;
+				dialogProcessor.ChangeColorOfNewGroup(color, newGroup);
+			}
 			base.Invalidate();
 		}
     }

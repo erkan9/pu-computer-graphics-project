@@ -67,10 +67,15 @@ namespace Draw
             this.манипулацияНаГрупиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.смениЦветаНаГрупаRToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.смениЦветаНаГрупаCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.смениЦветаНаДругаГрупаToolStripMenuItem = new System.Windows.Forms.ToolStripTextBox();
-            this.завъртанеНаГрупаToolStripMenuItem = new System.Windows.Forms.ToolStripTextBox();
+            this.смениЦветаНаДругаГрупаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.завъртанеНаГрупаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.групаToolStripMenuItem3 = new System.Windows.Forms.ToolStripTextBox();
             this.размериToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.увеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.намаляванеToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.групаToolStripMenuItem = new System.Windows.Forms.ToolStripTextBox();
+            this.изтриванеНаГрупаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.групаToolStripMenuItem1 = new System.Windows.Forms.ToolStripTextBox();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusBar = new System.Windows.Forms.StatusStrip();
@@ -105,14 +110,15 @@ namespace Draw
             this.копирайПравоъгълникToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.копирайКатоКръгToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.копирайКатоЕлипсаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.именуванеНаФигуратаToolStripMenuItem = new System.Windows.Forms.ToolStripTextBox();
-            this.промениГрупатаToolStripMenuItem = new System.Windows.Forms.ToolStripTextBox();
+            this.именуванеНаФигуратаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.имеToolStripMenuItem = new System.Windows.Forms.ToolStripTextBox();
+            this.промениГрупатаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.групаToolStripMenuItem2 = new System.Windows.Forms.ToolStripTextBox();
             this.премахниОтГрупатаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.viewPort = new Draw.DoubleBufferedPanel();
-            this.увеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.групаToolStripMenuItem = new System.Windows.Forms.ToolStripTextBox();
+            this.групаToolStripMenuItem4 = new System.Windows.Forms.ToolStripTextBox();
             this.mainMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
             this.speedMenu.SuspendLayout();
@@ -387,7 +393,8 @@ namespace Draw
             this.смениЦветаНаГрупаCToolStripMenuItem,
             this.смениЦветаНаДругаГрупаToolStripMenuItem,
             this.завъртанеНаГрупаToolStripMenuItem,
-            this.размериToolStripMenuItem});
+            this.размериToolStripMenuItem,
+            this.изтриванеНаГрупаToolStripMenuItem});
             this.манипулацияНаГрупиToolStripMenuItem.Name = "манипулацияНаГрупиToolStripMenuItem";
             this.манипулацияНаГрупиToolStripMenuItem.Size = new System.Drawing.Size(186, 24);
             this.манипулацияНаГрупиToolStripMenuItem.Text = "Манипулация на Групи";
@@ -395,32 +402,42 @@ namespace Draw
             // смениЦветаНаГрупаRToolStripMenuItem
             // 
             this.смениЦветаНаГрупаRToolStripMenuItem.Name = "смениЦветаНаГрупаRToolStripMenuItem";
-            this.смениЦветаНаГрупаRToolStripMenuItem.Size = new System.Drawing.Size(437, 26);
+            this.смениЦветаНаГрупаRToolStripMenuItem.Size = new System.Drawing.Size(289, 26);
             this.смениЦветаНаГрупаRToolStripMenuItem.Text = "Смени цвета на група A";
             this.смениЦветаНаГрупаRToolStripMenuItem.Click += new System.EventHandler(this.смениЦветаНаГрупаRToolStripMenuItem_Click);
             // 
             // смениЦветаНаГрупаCToolStripMenuItem
             // 
             this.смениЦветаНаГрупаCToolStripMenuItem.Name = "смениЦветаНаГрупаCToolStripMenuItem";
-            this.смениЦветаНаГрупаCToolStripMenuItem.Size = new System.Drawing.Size(437, 26);
+            this.смениЦветаНаГрупаCToolStripMenuItem.Size = new System.Drawing.Size(289, 26);
             this.смениЦветаНаГрупаCToolStripMenuItem.Text = "Смени Цвета на група B";
             this.смениЦветаНаГрупаCToolStripMenuItem.Click += new System.EventHandler(this.смениЦветаНаГрупаCToolStripMenuItem_Click);
             // 
             // смениЦветаНаДругаГрупаToolStripMenuItem
             // 
-            this.смениЦветаНаДругаГрупаToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.смениЦветаНаДругаГрупаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.групаToolStripMenuItem4});
             this.смениЦветаНаДругаГрупаToolStripMenuItem.Name = "смениЦветаНаДругаГрупаToolStripMenuItem";
-            this.смениЦветаНаДругаГрупаToolStripMenuItem.Size = new System.Drawing.Size(289, 27);
+            this.смениЦветаНаДругаГрупаToolStripMenuItem.Size = new System.Drawing.Size(289, 26);
             this.смениЦветаНаДругаГрупаToolStripMenuItem.Text = "Смени Цвета на друга група";
             this.смениЦветаНаДругаГрупаToolStripMenuItem.Click += new System.EventHandler(this.смениЦветаНаДругаГрупаToolStripMenuItem_Click);
             // 
             // завъртанеНаГрупаToolStripMenuItem
             // 
-            this.завъртанеНаГрупаToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.завъртанеНаГрупаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.групаToolStripMenuItem3});
             this.завъртанеНаГрупаToolStripMenuItem.Name = "завъртанеНаГрупаToolStripMenuItem";
-            this.завъртанеНаГрупаToolStripMenuItem.Size = new System.Drawing.Size(363, 27);
+            this.завъртанеНаГрупаToolStripMenuItem.Size = new System.Drawing.Size(289, 26);
             this.завъртанеНаГрупаToolStripMenuItem.Text = "Завъртане на група";
             this.завъртанеНаГрупаToolStripMenuItem.Click += new System.EventHandler(this.завъртанеНаГрупаToolStripMenuItem_Click);
+            // 
+            // групаToolStripMenuItem3
+            // 
+            this.групаToolStripMenuItem3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.групаToolStripMenuItem3.Name = "групаToolStripMenuItem3";
+            this.групаToolStripMenuItem3.Size = new System.Drawing.Size(224, 27);
+            this.групаToolStripMenuItem3.Text = "Група";
+            this.групаToolStripMenuItem3.Click += new System.EventHandler(this.групаToolStripMenuItem3_Click);
             // 
             // размериToolStripMenuItem
             // 
@@ -429,8 +446,15 @@ namespace Draw
             this.намаляванеToolStripMenuItem2,
             this.групаToolStripMenuItem});
             this.размериToolStripMenuItem.Name = "размериToolStripMenuItem";
-            this.размериToolStripMenuItem.Size = new System.Drawing.Size(437, 26);
+            this.размериToolStripMenuItem.Size = new System.Drawing.Size(289, 26);
             this.размериToolStripMenuItem.Text = "Размери на група";
+            // 
+            // увеToolStripMenuItem
+            // 
+            this.увеToolStripMenuItem.Name = "увеToolStripMenuItem";
+            this.увеToolStripMenuItem.Size = new System.Drawing.Size(298, 26);
+            this.увеToolStripMenuItem.Text = "Увеличаване";
+            this.увеToolStripMenuItem.Click += new System.EventHandler(this.увеToolStripMenuItem_Click);
             // 
             // намаляванеToolStripMenuItem2
             // 
@@ -438,6 +462,30 @@ namespace Draw
             this.намаляванеToolStripMenuItem2.Size = new System.Drawing.Size(298, 26);
             this.намаляванеToolStripMenuItem2.Text = "Намаляване";
             this.намаляванеToolStripMenuItem2.Click += new System.EventHandler(this.намаляванеToolStripMenuItem2_Click);
+            // 
+            // групаToolStripMenuItem
+            // 
+            this.групаToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.групаToolStripMenuItem.Name = "групаToolStripMenuItem";
+            this.групаToolStripMenuItem.Size = new System.Drawing.Size(224, 27);
+            this.групаToolStripMenuItem.Text = "Група";
+            // 
+            // изтриванеНаГрупаToolStripMenuItem
+            // 
+            this.изтриванеНаГрупаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.групаToolStripMenuItem1});
+            this.изтриванеНаГрупаToolStripMenuItem.Name = "изтриванеНаГрупаToolStripMenuItem";
+            this.изтриванеНаГрупаToolStripMenuItem.Size = new System.Drawing.Size(289, 26);
+            this.изтриванеНаГрупаToolStripMenuItem.Text = "Изтриване на група";
+            this.изтриванеНаГрупаToolStripMenuItem.Click += new System.EventHandler(this.изтриванеНаГрупаToolStripMenuItem_Click);
+            // 
+            // групаToolStripMenuItem1
+            // 
+            this.групаToolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.групаToolStripMenuItem1.Name = "групаToolStripMenuItem1";
+            this.групаToolStripMenuItem1.Size = new System.Drawing.Size(224, 27);
+            this.групаToolStripMenuItem1.Text = "Група";
+            this.групаToolStripMenuItem1.Click += new System.EventHandler(this.групаToolStripMenuItem1_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -450,7 +498,7 @@ namespace Draw
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(139, 26);
             this.aboutToolStripMenuItem.Text = "GitHub";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -669,105 +717,124 @@ namespace Draw
             this.промениГрупатаToolStripMenuItem,
             this.премахниОтГрупатаToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(401, 350);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(281, 340);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // случайниЦветовеToolStripMenuItem1
             // 
             this.случайниЦветовеToolStripMenuItem1.Name = "случайниЦветовеToolStripMenuItem1";
-            this.случайниЦветовеToolStripMenuItem1.Size = new System.Drawing.Size(400, 24);
+            this.случайниЦветовеToolStripMenuItem1.Size = new System.Drawing.Size(280, 24);
             this.случайниЦветовеToolStripMenuItem1.Text = "Случайни цветове";
             this.случайниЦветовеToolStripMenuItem1.Click += new System.EventHandler(this.случайниЦветовеToolStripMenuItem1_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(400, 24);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(280, 24);
             this.deleteToolStripMenuItem.Text = "Цвят на запълване";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // копирайToolStripMenuItem
             // 
             this.копирайToolStripMenuItem.Name = "копирайToolStripMenuItem";
-            this.копирайToolStripMenuItem.Size = new System.Drawing.Size(400, 24);
+            this.копирайToolStripMenuItem.Size = new System.Drawing.Size(280, 24);
             this.копирайToolStripMenuItem.Text = "Цвят на линиите";
             this.копирайToolStripMenuItem.Click += new System.EventHandler(this.копирайToolStripMenuItem_Click);
             // 
             // транспарантноЗапълванеToolStripMenuItem
             // 
             this.транспарантноЗапълванеToolStripMenuItem.Name = "транспарантноЗапълванеToolStripMenuItem";
-            this.транспарантноЗапълванеToolStripMenuItem.Size = new System.Drawing.Size(400, 24);
+            this.транспарантноЗапълванеToolStripMenuItem.Size = new System.Drawing.Size(280, 24);
             this.транспарантноЗапълванеToolStripMenuItem.Text = "Прозрачно запълване";
             this.транспарантноЗапълванеToolStripMenuItem.Click += new System.EventHandler(this.транспарантноЗапълванеToolStripMenuItem_Click);
             // 
             // уголемиToolStripMenuItem
             // 
             this.уголемиToolStripMenuItem.Name = "уголемиToolStripMenuItem";
-            this.уголемиToolStripMenuItem.Size = new System.Drawing.Size(400, 24);
+            this.уголемиToolStripMenuItem.Size = new System.Drawing.Size(280, 24);
             this.уголемиToolStripMenuItem.Text = "Уголемяване";
             this.уголемиToolStripMenuItem.Click += new System.EventHandler(this.уголемиToolStripMenuItem_Click);
             // 
             // намаляванеToolStripMenuItem
             // 
             this.намаляванеToolStripMenuItem.Name = "намаляванеToolStripMenuItem";
-            this.намаляванеToolStripMenuItem.Size = new System.Drawing.Size(400, 24);
+            this.намаляванеToolStripMenuItem.Size = new System.Drawing.Size(280, 24);
             this.намаляванеToolStripMenuItem.Text = "Намаляване";
             this.намаляванеToolStripMenuItem.Click += new System.EventHandler(this.намаляванеToolStripMenuItem_Click);
             // 
             // завъртанеToolStripMenuItem1
             // 
             this.завъртанеToolStripMenuItem1.Name = "завъртанеToolStripMenuItem1";
-            this.завъртанеToolStripMenuItem1.Size = new System.Drawing.Size(400, 24);
+            this.завъртанеToolStripMenuItem1.Size = new System.Drawing.Size(280, 24);
             this.завъртанеToolStripMenuItem1.Text = "Завъртане";
             this.завъртанеToolStripMenuItem1.Click += new System.EventHandler(this.завъртанеToolStripMenuItem1_Click);
             // 
             // изтриванеToolStripMenuItem
             // 
             this.изтриванеToolStripMenuItem.Name = "изтриванеToolStripMenuItem";
-            this.изтриванеToolStripMenuItem.Size = new System.Drawing.Size(400, 24);
+            this.изтриванеToolStripMenuItem.Size = new System.Drawing.Size(280, 24);
             this.изтриванеToolStripMenuItem.Text = "Изтриване";
             this.изтриванеToolStripMenuItem.Click += new System.EventHandler(this.изтриванеToolStripMenuItem_Click);
             // 
             // копирайПравоъгълникToolStripMenuItem
             // 
             this.копирайПравоъгълникToolStripMenuItem.Name = "копирайПравоъгълникToolStripMenuItem";
-            this.копирайПравоъгълникToolStripMenuItem.Size = new System.Drawing.Size(400, 24);
+            this.копирайПравоъгълникToolStripMenuItem.Size = new System.Drawing.Size(280, 24);
             this.копирайПравоъгълникToolStripMenuItem.Text = "Копирай като Правоъгълник";
             this.копирайПравоъгълникToolStripMenuItem.Click += new System.EventHandler(this.копирайПравоъгълникToolStripMenuItem_Click);
             // 
             // копирайКатоКръгToolStripMenuItem
             // 
             this.копирайКатоКръгToolStripMenuItem.Name = "копирайКатоКръгToolStripMenuItem";
-            this.копирайКатоКръгToolStripMenuItem.Size = new System.Drawing.Size(400, 24);
+            this.копирайКатоКръгToolStripMenuItem.Size = new System.Drawing.Size(280, 24);
             this.копирайКатоКръгToolStripMenuItem.Text = "Копирай като Кръг";
             this.копирайКатоКръгToolStripMenuItem.Click += new System.EventHandler(this.копирайКатоКръгToolStripMenuItem_Click);
             // 
             // копирайКатоЕлипсаToolStripMenuItem
             // 
             this.копирайКатоЕлипсаToolStripMenuItem.Name = "копирайКатоЕлипсаToolStripMenuItem";
-            this.копирайКатоЕлипсаToolStripMenuItem.Size = new System.Drawing.Size(400, 24);
+            this.копирайКатоЕлипсаToolStripMenuItem.Size = new System.Drawing.Size(280, 24);
             this.копирайКатоЕлипсаToolStripMenuItem.Text = "Копирай като Елипса";
             this.копирайКатоЕлипсаToolStripMenuItem.Click += new System.EventHandler(this.копирайКатоЕлипсаToolStripMenuItem_Click);
             // 
             // именуванеНаФигуратаToolStripMenuItem
             // 
-            this.именуванеНаФигуратаToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.именуванеНаФигуратаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.имеToolStripMenuItem});
             this.именуванеНаФигуратаToolStripMenuItem.Name = "именуванеНаФигуратаToolStripMenuItem";
-            this.именуванеНаФигуратаToolStripMenuItem.Size = new System.Drawing.Size(280, 27);
+            this.именуванеНаФигуратаToolStripMenuItem.Size = new System.Drawing.Size(280, 24);
             this.именуванеНаФигуратаToolStripMenuItem.Text = "Именуване на фигурата";
             this.именуванеНаФигуратаToolStripMenuItem.Click += new System.EventHandler(this.именуванеНаФигуратаToolStripMenuItem_Click);
             // 
+            // имеToolStripMenuItem
+            // 
+            this.имеToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.имеToolStripMenuItem.Name = "имеToolStripMenuItem";
+            this.имеToolStripMenuItem.Size = new System.Drawing.Size(224, 27);
+            this.имеToolStripMenuItem.Text = "Име";
+            this.имеToolStripMenuItem.Click += new System.EventHandler(this.имеToolStripMenuItem_Click);
+            // 
             // промениГрупатаToolStripMenuItem
             // 
-            this.промениГрупатаToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.промениГрупатаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.групаToolStripMenuItem2});
             this.промениГрупатаToolStripMenuItem.Name = "промениГрупатаToolStripMenuItem";
-            this.промениГрупатаToolStripMenuItem.Size = new System.Drawing.Size(340, 27);
+            this.промениГрупатаToolStripMenuItem.Size = new System.Drawing.Size(280, 24);
             this.промениГрупатаToolStripMenuItem.Text = "Промени Групата";
             this.промениГрупатаToolStripMenuItem.Click += new System.EventHandler(this.промениГрупатаToolStripMenuItem_Click);
+            // 
+            // групаToolStripMenuItem2
+            // 
+            this.групаToolStripMenuItem2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.групаToolStripMenuItem2.Name = "групаToolStripMenuItem2";
+            this.групаToolStripMenuItem2.Size = new System.Drawing.Size(224, 27);
+            this.групаToolStripMenuItem2.Text = "Група";
+            this.групаToolStripMenuItem2.Click += new System.EventHandler(this.групаToolStripMenuItem2_Click);
             // 
             // премахниОтГрупатаToolStripMenuItem
             // 
             this.премахниОтГрупатаToolStripMenuItem.Name = "премахниОтГрупатаToolStripMenuItem";
-            this.премахниОтГрупатаToolStripMenuItem.Size = new System.Drawing.Size(400, 24);
+            this.премахниОтГрупатаToolStripMenuItem.Size = new System.Drawing.Size(280, 24);
             this.премахниОтГрупатаToolStripMenuItem.Text = "Премахни от групата";
             this.премахниОтГрупатаToolStripMenuItem.Click += new System.EventHandler(this.премахниОтГрупатаToolStripMenuItem_Click);
             // 
@@ -791,19 +858,13 @@ namespace Draw
             this.viewPort.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseMove);
             this.viewPort.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseUp);
             // 
-            // увеToolStripMenuItem
+            // групаToolStripMenuItem4
             // 
-            this.увеToolStripMenuItem.Name = "увеToolStripMenuItem";
-            this.увеToolStripMenuItem.Size = new System.Drawing.Size(298, 26);
-            this.увеToolStripMenuItem.Text = "Увеличаване";
-            this.увеToolStripMenuItem.Click += new System.EventHandler(this.увеToolStripMenuItem_Click);
-            // 
-            // групаToolStripMenuItem
-            // 
-            this.групаToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.групаToolStripMenuItem.Name = "групаToolStripMenuItem";
-            this.групаToolStripMenuItem.Size = new System.Drawing.Size(224, 27);
-            this.групаToolStripMenuItem.Text = "Група";
+            this.групаToolStripMenuItem4.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.групаToolStripMenuItem4.Name = "групаToolStripMenuItem4";
+            this.групаToolStripMenuItem4.Size = new System.Drawing.Size(224, 27);
+            this.групаToolStripMenuItem4.Text = "Група";
+            this.групаToolStripMenuItem4.Click += new System.EventHandler(this.групаToolStripMenuItem4_Click);
             // 
             // MainForm
             // 
@@ -829,7 +890,6 @@ namespace Draw
             this.speedMenu.ResumeLayout(false);
             this.speedMenu.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
-            this.contextMenuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -907,24 +967,30 @@ namespace Draw
         private System.Windows.Forms.ToolStripMenuItem копирайКатоКръгToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem копирайКатоЕлипсаToolStripMenuItem;
         private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
-        private System.Windows.Forms.ToolStripTextBox именуванеНаФигуратаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem избериЧрезToolStripMenuItem;
         private System.Windows.Forms.ToolStripTextBox имеНаФигураToolStripMenuItem;
         private System.Windows.Forms.ToolStripTextBox toolStripTextBox2;
         private System.Windows.Forms.ToolStripButton toolStripButton10;
         private System.Windows.Forms.ToolStripButton toolStripButton11;
         private System.Windows.Forms.ToolStripMenuItem правоъгълникСДиагоналToolStripMenuItem;
-        private System.Windows.Forms.ToolStripTextBox промениГрупатаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem манипулацияНаГрупиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem смениЦветаНаГрупаRToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem смениЦветаНаГрупаCToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripTextBox смениЦветаНаДругаГрупаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem премахниОтГрупатаToolStripMenuItem;
-        private System.Windows.Forms.ToolStripTextBox завъртанеНаГрупаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem размериToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem намаляванеToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem увеToolStripMenuItem;
         private System.Windows.Forms.ToolStripTextBox групаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem изтриванеНаГрупаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripTextBox групаToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem промениГрупатаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripTextBox групаToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem именуванеНаФигуратаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripTextBox имеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem завъртанеНаГрупаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripTextBox групаToolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem смениЦветаНаДругаГрупаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripTextBox групаToolStripMenuItem4;
     }
 }
