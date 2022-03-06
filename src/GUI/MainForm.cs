@@ -526,8 +526,9 @@ namespace Draw
 			Color fillColorOfCopiedFigure = dialogProcessor.Selection.FillColor;
 			Color strokeColorOfCopiedFigure = dialogProcessor.Selection.StrokeColor;
 			string name = dialogProcessor.Selection.Name;
+			string group = dialogProcessor.Selection.Group;
 
-			dialogProcessor.CopyAndAddRectangle(widthOfCopiedFigure, heightOfCopiedFigure, fillColorOfCopiedFigure, strokeColorOfCopiedFigure, name);
+			dialogProcessor.CopyAndAddRectangle(widthOfCopiedFigure, heightOfCopiedFigure, fillColorOfCopiedFigure, strokeColorOfCopiedFigure, name, group);
 
 			statusBar.Items[0].Text = "Последно действие: Копирано като правоъгълник";
 
@@ -550,8 +551,9 @@ namespace Draw
 			Color fillColorOfCopiedFigure = dialogProcessor.Selection.FillColor;
 			Color strokeColorOfCopiedFigure = dialogProcessor.Selection.StrokeColor;
 			string name = dialogProcessor.Selection.Name;
+			string group = dialogProcessor.Selection.Group;
 
-			dialogProcessor.CopyAndAddCircle(widthOfCopiedFigure, heightOfCopiedFigure, fillColorOfCopiedFigure, strokeColorOfCopiedFigure, name);
+			dialogProcessor.CopyAndAddCircle(widthOfCopiedFigure, heightOfCopiedFigure, fillColorOfCopiedFigure, strokeColorOfCopiedFigure, name, group);
 
 			statusBar.Items[0].Text = "Последно действие: копирано като Кръг";
 
@@ -572,8 +574,9 @@ namespace Draw
 			Color fillColorOfCopiedFigure = dialogProcessor.Selection.FillColor;
 			Color strokeColorOfCopiedFigure = dialogProcessor.Selection.StrokeColor;
 			string name = dialogProcessor.Selection.Name;
+			string group = dialogProcessor.Selection.Group;
 
-			dialogProcessor.CopyAndAddEllipse(widthOfCopiedFigure, heightOfCopiedFigure, fillColorOfCopiedFigure, strokeColorOfCopiedFigure, name);
+			dialogProcessor.CopyAndAddEllipse(widthOfCopiedFigure, heightOfCopiedFigure, fillColorOfCopiedFigure, strokeColorOfCopiedFigure, name, group);
 
 			statusBar.Items[0].Text = "Последно действие: копирано като Елипса";
 
@@ -616,7 +619,7 @@ namespace Draw
 
 			dialogProcessor.Selection.Name = input;
 
-			statusBar.Items[0].Text = "Името на фигурата бе променена на:" + input;
+			statusBar.Items[0].Text = "Името на фигурата бе променена на: " + input;
 
 		}
 
@@ -668,5 +671,51 @@ namespace Draw
 
 			base.Refresh();
 		}
+
+        private void промениГрупатаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			dialogProcessor.Selection.Group = промениГрупатаToolStripMenuItem.Text;
+
+			statusBar.Items[0].Text = "Последно действие: Групата на фигурата е променена на: " + промениГрупатаToolStripMenuItem.Text;
+		}
+
+        private void смениЦветаНаГрупаRToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			if (colorDialog1.ShowDialog() == DialogResult.OK)
+			{
+				Color color = colorDialog1.Color;
+				dialogProcessor.ChangeColorOfGroupA(color);
+			}
+
+			base.Invalidate();
+		}
+
+        private void смениЦветаНаГрупаCToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			if (colorDialog1.ShowDialog() == DialogResult.OK)
+			{
+				Color color = colorDialog1.Color;
+				dialogProcessor.ChangeColorOfGroupB(color);
+			}
+
+			base.Invalidate();
+		}
+
+        private void смениЦветаНаДругаГрупаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			string newGroup = смениЦветаНаДругаГрупаToolStripMenuItem.Text;
+
+			if (colorDialog1.ShowDialog() == DialogResult.OK)
+			{
+				Color color = colorDialog1.Color;
+				dialogProcessor.ChangeColorOfNewGroup(color, newGroup);
+			}
+			base.Invalidate();
+		}
+
+        private void премахниОтГрупатаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			dialogProcessor.Selection.Group = " ";
+        }
     }
 }

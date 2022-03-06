@@ -104,6 +104,8 @@ namespace Draw
 
 				Name = null,
 
+				Group = "A",
+
                 StrokeColor = Color.Black
             };
 
@@ -123,6 +125,8 @@ namespace Draw
 				FillColor = Color.White,
 
 				Name = null,
+
+				Group = "A",
 
 				StrokeColor = Color.Black
 			};
@@ -146,7 +150,7 @@ namespace Draw
 		}
 
 		public void CopyAndAddRectangle(int widthOfCopiedFigure, int heightOfCopiedFigure, 
-			Color fillColorOfCopiedFigure, Color strokeColorOfCopiedFigure, string name)
+			Color fillColorOfCopiedFigure, Color strokeColorOfCopiedFigure, string name, string group)
 		{
 			int x = rnd.Next(100, 1000);
 			int y = rnd.Next(100, 600);
@@ -157,6 +161,8 @@ namespace Draw
 
 				Name = name,
 
+				Group = group,
+
 				StrokeColor = strokeColorOfCopiedFigure
 			};
 
@@ -164,7 +170,7 @@ namespace Draw
 		}
 
 		public void CopyAndAddCircle(int widthOfCopiedFigure, int heightOfCopiedFigure,
-			Color fillColorOfCopiedFigure, Color strokeColorOfCopiedFigure, string name)
+			Color fillColorOfCopiedFigure, Color strokeColorOfCopiedFigure, string name, string group)
 		{
 			int x = rnd.Next(100, 1000);
 			int y = rnd.Next(100, 600);
@@ -175,6 +181,8 @@ namespace Draw
 
 				Name = name,
 
+				Group = group,
+
 				StrokeColor = strokeColorOfCopiedFigure
 			};
 
@@ -182,7 +190,7 @@ namespace Draw
 		}
 
 		public void CopyAndAddEllipse(int widthOfCopiedFigure, int heightOfCopiedFigure,
-			Color fillColorOfCopiedFigure, Color strokeColorOfCopiedFigure, string name)
+			Color fillColorOfCopiedFigure, Color strokeColorOfCopiedFigure, string name, string group)
 		{
 			int x = rnd.Next(100, 1000);
 			int y = rnd.Next(100, 600);
@@ -193,17 +201,52 @@ namespace Draw
 
 				Name = name,
 
+				Group = group,
+
 				StrokeColor = strokeColorOfCopiedFigure
 			};
 
 			ShapeList.Add(circ);
 		}
 
+		public void ChangeColorOfGroupA(Color color)
+		{
+			foreach (Shape shape in ShapeList)
+			{
+				if (shape.Group.Equals("A"))
+				{
+					shape.FillColor = color;
+				}
+			}
+		}
+
+		public void ChangeColorOfGroupB(Color color)
+		{
+			foreach (Shape shape in ShapeList)
+			{
+				if (shape.Group.Equals("B"))
+				{
+					shape.FillColor = color;
+				}
+			}
+		}
+
+		public void ChangeColorOfNewGroup(Color color, string newGroup)
+		{
+			foreach (Shape shape in ShapeList)
+			{
+				if (shape.Group.Equals(newGroup))
+				{
+					shape.FillColor = color;
+				}
+			}
+		}
+
 		public bool SelectByName(string figureName)
         {
 			foreach (Shape shape in ShapeList)
             {
-				if (shape.Name == figureName)
+				if (shape.Name.Equals(figureName))
                 {
 					return true;
 				}
@@ -223,6 +266,8 @@ namespace Draw
 
 				Name = null,
 
+				Group = "B",
+
 				StrokeColor = Color.Black
             };
 
@@ -240,6 +285,8 @@ namespace Draw
                 FillColor = Color.White,
 
 				Name = null,
+
+				Group = "B",
 
 				StrokeColor = Color.Black
             };
@@ -259,13 +306,18 @@ namespace Draw
 			int x2 = rnd.Next(250, 1000);
 			int y2 = rnd.Next(200, 600);
 
-			LineShape line = new LineShape(new Rectangle(x, y,  x2, y2));
+            LineShape line = new LineShape(new Rectangle(x, y, x2, y2))
+            {
+                FillColor = Color.White,
 
-			line.FillColor = Color.White;
+				Name = null,
 
-			line.StrokeColor = Color.Black;
+				Group = null,
 
-			ShapeList.Add(line);
+				StrokeColor = Color.Black
+            };
+
+            ShapeList.Add(line);
 		}
 
 		/// <summary>

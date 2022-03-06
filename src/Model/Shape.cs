@@ -29,6 +29,8 @@ namespace Draw
 
 			this.Name = shape.Name;
 
+			this.Group = shape.Group;
+
 			this.FillColor =  shape.FillColor;
 		}
 		#endregion
@@ -42,7 +44,9 @@ namespace Draw
 
         public virtual string Name { get; set; }
 
-        public virtual RectangleF Rectangle {
+		public virtual string Group { get; set; }
+
+		public virtual RectangleF Rectangle {
 			get { return rectangle; }
 			set { rectangle = value; }
 		}
