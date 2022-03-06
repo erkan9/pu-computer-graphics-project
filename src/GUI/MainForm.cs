@@ -1,18 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
 namespace Draw
 {
-	/// <summary>
-	/// Върху главната форма е поставен потребителски контрол,
-	/// в който се осъществява визуализацията
-	/// </summary>
-	public partial class MainForm : Form
+    /// <summary>
+    /// Върху главната форма е поставен потребителски контрол,
+    /// в който се осъществява визуализацията
+    /// </summary>
+    public partial class MainForm : Form
 	{
 
+		System.Windows.Forms.MouseEventArgs e;
 		private Random rnd = new Random();
 
 		/// <summary>
@@ -67,7 +67,6 @@ namespace Draw
 		{
 
 			if (pickUpSpeedButton.Checked) 
-
 			{
 				dialogProcessor.Selection = dialogProcessor.ContainsPoint(e.Location);
 
@@ -247,6 +246,7 @@ namespace Draw
 		{
 			Color randomColor = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
 
+
 			statusBar.Items[0].Text = "Последно действие: Цвета на лиините на фигурата е случайно";
 
 			dialogProcessor.Selection.StrokeColor = randomColor;
@@ -342,7 +342,7 @@ namespace Draw
                 {
 					bitmap.Save(saveFileDialog.FileName, System.Drawing.Imaging.ImageFormat.Bmp);
 				}
-            }
+			}
 			statusBar.Items[0].Text = "Последно действие: Запис на изображение";
 		}
 
@@ -439,6 +439,9 @@ namespace Draw
 		//Method that Reads and opens a file and uses it as a background
         private void toolStripButton8_Click(object sender, EventArgs e)
         {
+
+			Form something = new Form();
+
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
                 Filter = "Png files|*.png|jpeg files|*jpg|bitmaps|*.bmp"
@@ -447,6 +450,7 @@ namespace Draw
             if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 base.BackgroundImage = (Image)Image.FromFile(openFileDialog.FileName).Clone();
+
             }
 
 			statusBar.Items[0].Text = "Последно действие: Отвори/Прочети изображение";
@@ -591,7 +595,7 @@ namespace Draw
 
         private void toolStripTextBox2_Click(object sender, EventArgs e)
         {
-            string figureName = toolStripTextBox2.Text;
+			string figureName = toolStripTextBox2.Text;
 
 			string input = null;
 
@@ -615,5 +619,54 @@ namespace Draw
 			statusBar.Items[0].Text = "Името на фигурата бе променена на:" + input;
 
 		}
-	}
+
+        private void избериЧрезToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			string input = имеНаФигураToolStripMenuItem.Text;
+
+			if (dialogProcessor.SelectByName(input))
+			{
+				statusBar.Items[0].Text = "Последно действие: Селекция на примитив чрез име";
+
+				viewPort.Invalidate();
+			}
+		}
+
+        private void имеНаФигураToolStripMenuItem_Click(object sender, EventArgs e)
+		{ 
+
+		}
+		
+
+		private void toolStripButton10_Click(object sender, EventArgs e)
+        {
+			dialogProcessor.Save();
+			base.Invalidate();
+			statusBar.Items[0].Text = "Последно действие: Сериализация";
+		}
+
+        private void toolStripButton11_Click(object sender, EventArgs e)
+        {
+
+	
+		}
+
+        private void toolStripButton11_Click_1(object sender, EventArgs e)
+        {
+			dialogProcessor.Load();
+			base.Invalidate();
+			statusBar.Items[0].Text = "Последно действие: Десериализация";
+		}
+
+        private void правоъгълникСДиагоналToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			dialogProcessor.AddRandomRectangleWithLine();
+
+			statusBar.Items[0].Text = "Последно действие: Рисуване на правоъгълник";
+
+			viewPort.Invalidate();
+
+			base.Refresh();
+		}
+    }
 }

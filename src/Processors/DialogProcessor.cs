@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Draw
 {
 	/// <summary>
 	/// Класът, който ще бъде използван при управляване на диалога.
 	/// </summary>
+	
+	[Serializable]
 	public class DialogProcessor : DisplayProcessor
 	{
 		#region Constructor
@@ -47,9 +51,45 @@ namespace Draw
 			get { return lastLocation; }
 			set { lastLocation = value; }
 		}
-		
 		#endregion
-		
+
+		public void Save()
+		{
+			string path = @"D:\temp\figures.bin";
+
+			FileStream fileStream;
+			BinaryFormatter formatter = new BinaryFormatter();	
+
+			if(File.Exists(path)) File.Delete(path);	
+			fileStream = File.Create(path);
+			formatter.Serialize(fileStream, ShapeList);
+			fileStream.Close();
+		}
+
+		public void Load()
+        {
+			string path = @"D:\temp\figures.bin";
+			object obj = null;
+
+			FileStream fileStream;
+
+			BinaryFormatter formatter = new BinaryFormatter();
+
+			if(File.Exists(path))
+            {
+				fileStream = File.OpenRead(path);
+
+				obj = formatter.Deserialize(fileStream);
+				fileStream.Close();
+            }
+		}
+
+		public virtual void Show(Graphics e)
+		{
+			ShapeList.ForEach(x => x.DrawSelf(e));
+		}
+
+
 		/// <summary>
 		/// Добавя примитив - правоъгълник на произволно място върху клиентската област.
 		/// </summary>
@@ -68,6 +108,26 @@ namespace Draw
             };
 
             ShapeList.Add(rect);
+		}
+
+		/// <summary>
+		/// Добавя примитив - правоъгълник на произволно място върху клиентската област.
+		/// </summary>
+		public void AddRandomRectangleWithLine()
+		{
+			int x = rnd.Next(100, 1000);
+			int y = rnd.Next(100, 600);
+
+			RectangleWithLineShape rectWithLine = new RectangleWithLineShape(new Rectangle(x, y, 200, 100))
+			{
+				FillColor = Color.White,
+
+				Name = null,
+
+				StrokeColor = Color.Black
+			};
+
+			ShapeList.Add(rectWithLine);
 		}
 
 		public void ChangeColorByFigureName(string figureName, Color color)
@@ -139,6 +199,18 @@ namespace Draw
 			ShapeList.Add(circ);
 		}
 
+		public bool SelectByName(string figureName)
+        {
+			foreach (Shape shape in ShapeList)
+            {
+				if (shape.Name == figureName)
+                {
+					return true;
+				}
+            }
+			return false;
+        }
+
 		/// <summary>
 		/// Добавя примитив - Кръг на произволно място върху клиентската област.
 		/// </summary>
@@ -208,8 +280,6 @@ namespace Draw
 			for(int counter = ShapeList.Count - 1; counter >= 0; counter--){
 
 				if (ShapeList[counter].Contains(point)){
-
-						
 					return ShapeList[counter];
 				}	
 			}

@@ -1,21 +1,23 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace Draw
 {
 	/// <summary>
 	/// Класът правоъгълник е основен примитив, който е наследник на базовия Shape.
 	/// </summary>
+
 	[Serializable]
-	public class LineShape : Shape
+	public class RectangleWithLineShape : Shape
 	{
 		#region Constructor
 
-		public LineShape(RectangleF rect) : base(rect)
+		public RectangleWithLineShape(RectangleF rect) : base(rect)
 		{
 		}
 
-		public LineShape(RectangleShape rectangle) : base(rectangle)
+		public RectangleWithLineShape(RectangleShape rectangle) : base(rectangle)
 		{
 		}
 
@@ -46,7 +48,11 @@ namespace Draw
 		{
 			base.DrawSelf(grfx);
 
-			grfx.DrawLine(new Pen(StrokeColor), Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
+			Pen greenPen = new Pen(Color.FromArgb(255, 0, 255, 0), 10);
+
+			grfx.FillRectangle(new SolidBrush(FillColor), Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
+			grfx.DrawRectangle(new Pen(StrokeColor), Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
+			grfx.DrawLine(Pens.Black, Rectangle.Right, Rectangle.Top, Rectangle.Left, Rectangle.Bottom);
 		}
 	}
 }

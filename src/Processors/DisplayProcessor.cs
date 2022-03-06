@@ -64,7 +64,7 @@ namespace Draw
 		{
 			item.DrawSelf(grfx);
 		}
-		
+
 		#endregion
 	}
 }
