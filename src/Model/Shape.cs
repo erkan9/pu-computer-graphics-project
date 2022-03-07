@@ -3,17 +3,15 @@ using System.Drawing;
 
 namespace Draw
 {
-	/// <summary>
-	/// Базовия клас на примитивите, който съдържа общите характеристики на примитивите.
-	/// </summary>
-	[Serializable]
+    /// <summary>
+    /// Base class of the Figures, which contains characteristics of the figures.
+    /// </summary>
+    [Serializable]
 	public abstract class Shape
 	{
 		#region Constructors
 
-		public Shape()
-		{
-		}
+		public Shape() {}
 		
 		public Shape(RectangleF rect)
 		{
@@ -33,59 +31,64 @@ namespace Draw
 
 			this.FillColor =  shape.FillColor;
 		}
-		#endregion
-		
-		#region Properties
-		
-		/// <summary>
-		/// Обхващащ правоъгълник на елемента.
-		/// </summary>
-		private RectangleF rectangle;
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Enclosing rectangle of the element.
+        /// </summary>
+        private RectangleF rectangle;
 
         public virtual string Name { get; set; }
 
 		public virtual string Group { get; set; }
 
-		public virtual RectangleF Rectangle {
+		public virtual RectangleF Rectangle
+		{
 			get { return rectangle; }
 			set { rectangle = value; }
 		}
 		
 		/// <summary>
-		/// Широчина на елемента.
+		/// Width of Shapes.
 		/// </summary>
-		public virtual float Width {
+		public virtual float Width
+		{
 			get { return Rectangle.Width; }
 			set { rectangle.Width = value; }
 		}
-		
+
 		/// <summary>
-		/// Височина на елемента.
+		/// Height of Shapes.
 		/// </summary>
-		public virtual float Height {
+		public virtual float Height
+		{
 			get { return Rectangle.Height; }
 			set { rectangle.Height = value; }
 		}
 
 		/// <summary>
-		/// Горен ляв ъгъл на елемента.
+		/// Top Left edge of the figure.
 		/// </summary>
-		public virtual PointF Location {
+		public virtual PointF Location 
+		{
 			get { return Rectangle.Location; }
 			set { rectangle.Location = value; }
 		}
 		
 		/// <summary>
-		/// Цвят на елемента.
+		/// Fill Color of the figure.
 		/// </summary>
 		private Color fillColor;		
-		public virtual Color FillColor {
+		public virtual Color FillColor 
+		{
 			get { return fillColor; }
 			set { fillColor = value; }
 		}
 
 		/// <summary>
-		/// Цвят на елемента.
+		/// Stroke Color of the figure.
 		/// </summary>
 		private Color strokeColor;
 		public virtual Color StrokeColor
@@ -98,68 +101,22 @@ namespace Draw
 
 
 		/// <summary>
-		/// Проверка дали точка point принадлежи на елемента.
+		/// Check if the points Poins inside the element
 		/// </summary>
-		/// <param name="point">Точка</param>
-		/// <returns>Връща true, ако точката принадлежи на елемента и
-		/// false, ако не пренадлежи</returns>
+		/// <param name="point">THe Points</param>
+		/// <returns>Returns True if it is in the element or
+		/// false, if it does not</returns>
 		public virtual bool Contains(PointF point)
 		{
 
 			return Rectangle.Contains(point.X, point.Y);
 		}
 
-
-		//Method that checks if the Points of Mouse are inside the Circle
-		public virtual bool ContainsCircle(PointF point)
-		{
-
-			int offSet = 50;  
-
-			Console.WriteLine("Clicked Location X={0} Y={1}", point.X, point.Y);
-			Console.WriteLine("Figure Location X={0} Y={1}", Rectangle.X, Rectangle.Y);
-
-			if (((point.X - offSet) - Rectangle.X) * ((point.X- offSet) - Rectangle.X) + ((point.Y - offSet) -
-				Rectangle.Y) * ((point.Y- offSet) - Rectangle.Y) <= 50 * 50)
-			{
-				Console.WriteLine("The cursor is inside the Figure");
-
-				return true;					
-			}
-			else
-			{
-				Console.WriteLine("The cursor is NOT inside the Figure");
-
-				return false;
-			}
-		}
-
-		//Method that checks if the Points of Mouse are inside the Circle
-		public virtual bool ContainsEllipse(PointF point)
-		{
-
-			//(((point.X - offSet) - Rectangle.X) * ((point.X - 50) - Rectangle.X) + ((point.Y - 135) -
-			//Rectangle.Y) *((point.Y - offSet) - Rectangle.Y) <= 40 * 170)
-
-			Console.WriteLine("Clicked Location X={0} Y={1}", point.X, point.Y);
-			Console.WriteLine("Figure Location X={0} Y={1}", Rectangle.X, Rectangle.Y);
-
-			if (((point.X - 75) - Rectangle.X) * ((point.X - 60) - Rectangle.X) + ((point.Y - 100) -
-				Rectangle.Y) * ((point.Y - 100) - Rectangle.Y) <= 40 * 170)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-
-		/// <summary>
-		/// Визуализира елемента.
-		/// </summary>
-		/// <param name="grfx">Къде да бъде визуализиран елемента.</param>
-		public virtual void DrawSelf(Graphics grfx)
+        /// <summary>
+        /// Visualise the Element.
+        /// </summary>
+        /// <param name="grfx">The place where the figure is going to be visualised.</param>
+        public virtual void DrawSelf(Graphics grfx)
 		{
 			// shape.Rectangle.Inflate(shape.BorderWidth, shape.BorderWidth);
 		}

@@ -7,7 +7,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 namespace Draw
 {
 	/// <summary>
-	/// The class that is used for controling the dialog.
+	/// Класът, който ще бъде използван при управляване на диалога.
 	/// </summary>
 	
 	[Serializable]
@@ -19,26 +19,14 @@ namespace Draw
 		{
 		}
 
-        #endregion
+		#endregion
 
-        #region Properties
+		#region Properties
 
-        private readonly Random rnd = new Random();
-        private FileStream fileStream;
-		private readonly BinaryFormatter formatter = new BinaryFormatter();
-
-        private readonly string path = @"D:\temp\figures.bin";
-
-		private readonly string rectangleShapesGroupe = "A";
-
-		private readonly string rectangleShapesGroupeB = "B";
-
-		private readonly Color defaultFillColor = Color.White;
-
-		private readonly Color defaultStrokeColor = Color.Black;
+		Random rnd = new Random();
 
 		/// <summary>
-		/// The Chosen Element.
+		/// Избран елемент.
 		/// </summary>
 		private Shape selection;
 		public Shape Selection {
@@ -47,7 +35,7 @@ namespace Draw
 		}
 		
 		/// <summary>
-		/// Checks if currently the dialog is in form of "Draging" the chosen Element/Shape.
+		/// Дали в момента диалога е в състояние на "влачене" на избрания елемент.
 		/// </summary>
 		private bool isDragging;
 		public bool IsDragging {
@@ -56,7 +44,8 @@ namespace Draw
 		}
 		
 		/// <summary>
-		/// The last position of the Cursor while in form if "Draging"
+		/// Последна позиция на мишката при "влачене".
+		/// Използва се за определяне на вектора на транслация.
 		/// </summary>
 		private PointF lastLocation;
 		public PointF LastLocation {
@@ -65,47 +54,52 @@ namespace Draw
 		}
 		#endregion
 
-		/// <summary>
-		/// Method that Serializes and used to save the Drawing as a .bin file in a specific path.
-		/// </summary>
 		public void Save()
 		{
+			string path = @"D:\temp\figures.bin";
+
+			FileStream fileStream;
+			BinaryFormatter formatter = new BinaryFormatter();	
+
+			if(File.Exists(path)) File.Delete(path);
 			
-			if (File.Exists(this.path))
-			{
-				File.Delete(this.path);
-			}
+			fileStream = File.Create(path);
 
-            this.fileStream = File.Create(this.path);
+			formatter.Serialize(fileStream, ShapeList);
 
-			this.formatter.Serialize(fileStream, ShapeList);
-
-			this.fileStream.Close();
+			fileStream.Close();
 		}
 
-		/// <summary>
-		/// Method that Deserialize and used for Loading the Last drawing, which is saved as a .bin file.
-		/// </summary>
 		public void Load()
         {
+			string path = @"D:\temp\figures.bin";
 			object obj = null;
 
-			if(File.Exists(this.path))
+			FileStream fileStream;
+
+			BinaryFormatter formatter = new BinaryFormatter();
+
+			if(File.Exists(path))
             {
-				this.fileStream = File.OpenRead(this.path);
+				fileStream = File.OpenRead(path);
 
-				obj = this.formatter.Deserialize(this.fileStream);
+				obj = formatter.Deserialize(fileStream);
 
-				var res = (List<Shape>)obj;
+				 var res = (List<Shape>)obj;
+				res.ForEach(S => ShapeList.Add(S));
 
-				res.ForEach(s => ShapeList.Add(s));
-
-				this.fileStream.Close();
+				fileStream.Close();
             }
 		}
 
+		public virtual void Show(Graphics e)
+		{
+			ShapeList.ForEach(x => x.DrawSelf(e));
+		}
+
+
 		/// <summary>
-		/// Method that Creates and Draws a Rectangle Figure in a random location.
+		/// Добавя примитив - правоъгълник на произволно място върху клиентската област.
 		/// </summary>
 		public void AddRandomRectangle()
 		{
@@ -114,20 +108,20 @@ namespace Draw
 
 			RectangleShape rect = new RectangleShape(new Rectangle(x, y, 100, 200))
 			{
-				FillColor = defaultFillColor,
+				FillColor = Color.White,
 
 				Name = "Rectangle",
 
-				Group = rectangleShapesGroupe,
+				Group = "A",
 
-                StrokeColor = defaultStrokeColor
-			};
+                StrokeColor = Color.Black
+            };
 
             ShapeList.Add(rect);
 		}
 
 		/// <summary>
-		/// Method that Creates and Draws a Rectangle Figure with 1 Diagonal in a random location.
+		/// Добавя примитив - правоъгълник на произволно място върху клиентската област.
 		/// </summary>
 		public void AddRandomRectangleWithLine()
 		{
@@ -136,86 +130,18 @@ namespace Draw
 
 			RectangleWithLineShape rectWithLine = new RectangleWithLineShape(new Rectangle(x, y, 200, 100))
 			{
-				FillColor = defaultFillColor,
+				FillColor = Color.White,
 
 				Name = "Rectangle",
 
-				Group = rectangleShapesGroupe,
+				Group = "A",
 
-				StrokeColor = defaultStrokeColor
+				StrokeColor = Color.Black
 			};
 
 			ShapeList.Add(rectWithLine);
 		}
 
-
-		/// <summary>
-		/// Method that Creates and Draws a Circle in a specific location.
-		/// </summary>
-		public void AddCircle()
-		{
-
-			CircleShape circle = new CircleShape(new Rectangle(680, 300, 100, 100))
-			{
-				FillColor = defaultFillColor,
-
-				Name = "Circle",
-
-				Group = rectangleShapesGroupeB,
-
-				StrokeColor = defaultStrokeColor
-			};
-
-			ShapeList.Add(circle);
-		}
-
-		/// <summary>
-		/// Method that Creates and Draws a Ellipse in a specific location.
-		/// </summary>
-		public void AddEllipse()
-		{
-
-			EllipseShape ellipse = new EllipseShape(new Rectangle(680, 200, 145, 175))
-			{
-				FillColor = defaultFillColor,
-
-				Name = "Ellipse",
-
-				Group = rectangleShapesGroupeB,
-
-				StrokeColor = defaultStrokeColor
-			};
-
-			ShapeList.Add(ellipse);
-		}
-
-		/// Method that Creates and Draws a Line in a Random Location.
-		public void AddLine()
-		{
-
-			int x = rnd.Next(200, 1000);
-			int y = rnd.Next(160, 600);
-
-			int x2 = rnd.Next(250, 1000);
-			int y2 = rnd.Next(200, 600);
-
-			LineShape line = new LineShape(new Rectangle(x, y, x2, y2))
-			{
-				FillColor = defaultFillColor,
-
-				Name = "Line",
-
-				Group = rectangleShapesGroupeB,
-
-				StrokeColor = defaultStrokeColor
-			};
-
-			ShapeList.Add(line);
-		}
-
-		/// <summary>
-		/// Method that Find a feagure by its name and changes its color.
-		/// </summary>
 		public void ChangeColorByFigureName(string figureName, Color color)
 		{
 			foreach (var Shape in ShapeList)
@@ -224,12 +150,13 @@ namespace Draw
                 {
 					Shape.FillColor = color;
                 }
+				else
+                {
+					Console.WriteLine("There is not a figure with that name");
+                }
 			}
 		}
 
-		/// <summary>
-		/// Method that Copys and creates the chosen Figure as a Rectangle.
-		/// </summary>
 		public void CopyAndAddRectangle(int widthOfCopiedFigure, int heightOfCopiedFigure, 
 			Color fillColorOfCopiedFigure, Color strokeColorOfCopiedFigure, string name, string group)
 		{
@@ -250,9 +177,6 @@ namespace Draw
 			ShapeList.Add(rect);
 		}
 
-		/// <summary>
-		/// Method that Copys and creates the chosen Figure as a Circle.
-		/// </summary>
 		public void CopyAndAddCircle(int widthOfCopiedFigure, int heightOfCopiedFigure,
 			Color fillColorOfCopiedFigure, Color strokeColorOfCopiedFigure, string name, string group)
 		{
@@ -273,9 +197,6 @@ namespace Draw
 			ShapeList.Add(ellipse);
 		}
 
-		/// <summary>
-		/// Method that Copys and creates the chosen Figure as a Ellipse.
-		/// </summary>
 		public void CopyAndAddEllipse(int widthOfCopiedFigure, int heightOfCopiedFigure,
 			Color fillColorOfCopiedFigure, Color strokeColorOfCopiedFigure, string name, string group)
 		{
@@ -296,23 +217,28 @@ namespace Draw
 			ShapeList.Add(circ);
 		}
 
-		/// <summary>
-		/// Method that changes given group's figure's color.
-		/// </summary>
-		public void ChangeColorOfGroup(Color color, string groupName)
+		public void ChangeColorOfGroupA(Color color)
 		{
 			foreach (Shape shape in ShapeList)
 			{
-				if (shape.Group.Equals(groupName))
+				if (shape.Group.Equals("A"))
 				{
 					shape.FillColor = color;
 				}
 			}
 		}
 
-		/// <summary>
-		/// Method that Finds a new Created group and changes its color.
-		/// </summary>
+		public void ChangeColorOfGroupB(Color color)
+		{
+			foreach (Shape shape in ShapeList)
+			{
+				if (shape.Group.Equals("B"))
+				{
+					shape.FillColor = color;
+				}
+			}
+		}
+
 		public void ChangeColorOfNewGroup(Color color, string newGroup)
 		{
 			foreach (Shape shape in ShapeList)
@@ -324,9 +250,6 @@ namespace Draw
 			}
 		}
 
-		/// <summary>
-		/// Method that selects a figure by its name.
-		/// </summary>
 		public bool SelectByName(string figureName)
         {
 			foreach (Shape shape in ShapeList)
@@ -339,24 +262,6 @@ namespace Draw
 			return false;
         }
 
-		/// <summary>
-		/// Method Deletes a given Group Name.
-		/// </summary>
-		public void DeleteGroup(string groupName)
-		{
-			foreach (Shape shape in ShapeList)
-			{
-				if (shape.Group.Equals(groupName))
-				{
-					shape.Group = "no";
-				}
-			}
-		}
-
-		/// <summary>
-		/// Make Bigger.
-		/// Method that makes Size changes of all the figures in a given Group by name.
-		/// </summary>
 		public void MakeBiggerByGroupName(string groupName)
 		{
 			foreach (Shape shape in ShapeList)
@@ -369,10 +274,17 @@ namespace Draw
 			}
 		}
 
-		/// <summary>
-		/// Make Smaller.
-		/// Method that makes Size changes of all the figures in a given Group by name.
-		/// </summary>
+		public void DeleteGroup(string groupName)
+		{
+			foreach (Shape shape in ShapeList)
+			{
+				if (shape.Group.Equals(groupName))
+				{
+					shape.Group = "no";
+				}
+			}
+		}
+
 		public void MakeSMallerByGroupName(string groupName)
 		{
 			foreach (Shape shape in ShapeList)
@@ -385,9 +297,6 @@ namespace Draw
 			}
 		}
 
-		/// <summary>
-		/// Method that Rotates all the figures in a given Group by name.
-		/// </summary>
 		public void RotateByGroupName(string groupName)
         {
 			foreach (Shape shape in ShapeList)
@@ -401,6 +310,72 @@ namespace Draw
 					shape.Height = figureWidth;
 				}
 			}
+		}
+
+		/// <summary>
+		/// Добавя примитив - Кръг на произволно място върху клиентската област.
+		/// </summary>
+		public void AddCircle()
+		{
+
+            CircleShape circle = new CircleShape(new Rectangle(680, 300, 100, 100))
+            {
+                FillColor = Color.White,
+
+				Name = "Circle",
+
+				Group = "B",
+
+				StrokeColor = Color.Black
+            };
+
+            ShapeList.Add(circle);
+		}
+
+		/// <summary>
+		/// Добавя примитив - Елипса на произволно място върху клиентската област.
+		/// </summary>
+		public void AddEllipse()
+		{
+
+            EllipseShape ellipse = new EllipseShape(new Rectangle(680, 200, 145, 175))
+            {
+                FillColor = Color.White,
+
+				Name = "Ellipse",
+
+				Group = "B",
+
+				StrokeColor = Color.Black
+            };
+
+            ShapeList.Add(ellipse);
+		}
+
+		/// <summary>
+		/// Добавя примитив - Елипса на произволно място върху клиентската област.
+		/// </summary>
+		public void AddLine()
+		{
+
+            int x = rnd.Next(200, 1000);
+			int y = rnd.Next(160, 600);
+
+			int x2 = rnd.Next(250, 1000);
+			int y2 = rnd.Next(200, 600);
+
+            LineShape line = new LineShape(new Rectangle(x, y, x2, y2))
+            {
+                FillColor = Color.White,
+
+				Name = "Line",
+
+				Group = "A",
+
+				StrokeColor = Color.Black
+            };
+
+            ShapeList.Add(line);
 		}
 
 		/// <summary>
@@ -420,18 +395,16 @@ namespace Draw
 			}
 			return null;
 		}
-
+		
 		/// <summary>
-		/// Translation of the chosen Figure of Vector decided from <paramref name="points>p</paramref>
+		/// Транслация на избраният елемент на вектор определен от <paramref name="p>p</paramref>
 		/// </summary>
-		/// <param name="points">Vector of Translation.</param>
-		public void TranslateTo(PointF points)
+		/// <param name="p">Вектор на транслация.</param>
+		public void TranslateTo(PointF p)
 		{
 			if (selection != null) {
-
-				selection.Location = new PointF(selection.Location.X + points.X - lastLocation.X, selection.Location.Y + points.Y - lastLocation.Y);
-
-				lastLocation = points;
+				selection.Location = new PointF(selection.Location.X + p.X - lastLocation.X, selection.Location.Y + p.Y - lastLocation.Y);
+				lastLocation = p;
 			}
 		}
 	}

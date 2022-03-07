@@ -5,19 +5,33 @@ using System.Windows.Forms;
 
 namespace Draw
 {
+    /// <summary>
+    /// Върху главната форма е поставен потребителски контрол,
+    /// в който се осъществява визуализацията
+    /// </summary>
     public partial class MainForm : Form
 	{
-        private readonly Random rnd = new Random();
+        private Random rnd = new Random();
 
-		private readonly DialogProcessor dialogProcessor = new DialogProcessor();
+		/// <summary>
+		/// Агрегирания диалогов процесор във формата улеснява манипулацията на модела.
+		/// </summary>
+		private DialogProcessor dialogProcessor = new DialogProcessor();
 
 		public MainForm()
 		{
+			//
+			// The InitializeComponent() call is required for Windows Forms designer support.
+			//
 			InitializeComponent();
+			
+			//
+			// TODO: Add constructor code after the InitializeComponent() call.
+			//
 		}
 
 		/// <summary>
-		/// Method that Exits and closes the Program.
+		/// Изход от програмата. Затваря главната форма, а с това и програмата.
 		/// </summary>
 		void ExitToolStripMenuItemClick(object sender, EventArgs e)
 		{
@@ -25,15 +39,17 @@ namespace Draw
 		}
 		
 		/// <summary>
-		/// Method that i used to visualise the Drawing Changes.
+		/// Събитието, което се прихваща, за да се превизуализира при изменение на модела.
 		/// </summary>
 		void ViewPortPaint(object sender, PaintEventArgs e)
 		{
 			dialogProcessor.ReDraw(sender, e);
+			//dialogProcessor.Show(e);	
 		}
 		
 		/// <summary>
-		/// Method that Draws a Rectangle on click of a Button.
+		/// Бутон, който поставя на произволно място правоъгълник със зададените размери.
+		/// Променя се лентата със състоянието и се инвалидира контрола, в който визуализираме.
 		/// </summary>
 		void DrawRectangleSpeedButtonClick(object sender, EventArgs e)
 		{
@@ -41,10 +57,14 @@ namespace Draw
 		}
 
 		/// <summary>
-		/// Method that Checks if the click is aon  Figure. If true it starts Dragging the figure
+		/// Прихващане на координатите при натискането на бутон на мишката и проверка (в обратен ред) дали не е
+		/// щракнато върху елемент. Ако е така то той се отбелязва като селектиран и започва процес на "влачене".
+		/// Промяна на статуса и инвалидиране на контрола, в който визуализираме.
+		/// Реализацията се диалогът с потребителя, при който се избира "най-горния" елемент от екрана.
 		/// </summary>
 		void ViewPortMouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
 		{
+
 			if (pickUpSpeedButton.Checked) 
 			{
 				dialogProcessor.Selection = dialogProcessor.ContainsPoint(e.Location);
@@ -63,127 +83,89 @@ namespace Draw
 		}
 
 		/// <summary>
-		/// Method that follows the mouse if it is dragging a Figure
+		/// Прихващане на преместването на мишката.
+		/// Ако сме в режм на "влачене", то избрания елемент се транслира.
 		/// </summary>
 		void ViewPortMouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
 		{
-			if (dialogProcessor.IsDragging)
-			{
-				if (dialogProcessor.Selection != null)
-				{
-					statusBar.Items[0].Text = "Последно действие: Влачене";
-				}
-
+			if (dialogProcessor.IsDragging) {
+				if (dialogProcessor.Selection != null) statusBar.Items[0].Text = "Последно действие: Влачене";
 				dialogProcessor.TranslateTo(e.Location);
-
 				viewPort.Invalidate();
 			}
 		}
 
 		/// <summary>
-		/// Method that changes Dragging to false. When Mouse Clicks off.
+		/// Прихващане на отпускането на бутона на мишката.
+		/// Излизаме от режим "влачене".
 		/// </summary>
 		void ViewPortMouseUp(object sender, System.Windows.Forms.MouseEventArgs e)
 		{
 			dialogProcessor.IsDragging = false;
 		}
 
-		/// <summary>
-		/// Method that draws a Circle.
-		/// </summary>
-		private void toolStripButton1_Click(object sender, EventArgs e)
+        private void toolStripButton1_Click(object sender, EventArgs e)
         {
 
 			DrawCircleOnClick();
 
 		}
 
-		/// <summary>
-		/// Method that changes the Fill Color of the Chosen Figure.
-		/// </summary>
-		private void toolStripButton2_Click(object sender, EventArgs e)
+        private void toolStripButton2_Click(object sender, EventArgs e)
         {
-			ChangeFillColorOfFigure();
+			ChangeFillColorOfFigure(sender,e);
         }
 
-
-		/// <summary>
-		/// Method that draws a Line.
-		/// </summary>
-		private void toolStripButton3_Click(object sender, EventArgs e)
+        private void toolStripButton3_Click(object sender, EventArgs e)
         {
 			DrawLineOnClick();
 		}
 
-		/// <summary>
-		/// Method that changes the Stroke Color of the figure.
-		/// </summary>
-		private void toolStripButton4_Click(object sender, EventArgs e)
+        private void toolStripButton4_Click(object sender, EventArgs e)
         {
-			ChangeStrokeColorOfFigure();
+			ChangeStrokeColorOfFigure(sender, e);
 		}
 
-		/// <summary>
-		/// Method that changes the Stroke Color of the figure.
-		/// </summary>
-		private void цToolStripMenuItem_Click(object sender, EventArgs e)
+        private void цToolStripMenuItem_Click(object sender, EventArgs e)
         {
-			ChangeStrokeColorOfFigure();
+			ChangeStrokeColorOfFigure(sender, e);
 		}
 
-		/// <summary>
-		/// Method that changes the Fill Color of the Chosen Figure.
-		/// </summary>
-		private void ЦвятНаЗапълванеToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ЦвятНаЗапълванеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-			ChangeFillColorOfFigure();
+			ChangeFillColorOfFigure(sender, e);
 		}
 
-		private void СелекцияToolStripMenuItem_Click(object sender, EventArgs e) { }
+        private void СелекцияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
 
-		/// <summary>
-		/// Method that Draws Rectangle on a click.
-		/// </summary>
-		private void ПравоъгълникToolStripMenuItem_Click(object sender, EventArgs e)
+		}
+
+        private void ПравоъгълникToolStripMenuItem_Click(object sender, EventArgs e)
         {
 			DrawRectangleOnClick();
 		}
 
-		/// <summary>
-		/// Method that Draws Circle on a click.
-		/// </summary>
-		private void КръгToolStripMenuItem_Click(object sender, EventArgs e)
+        private void КръгToolStripMenuItem_Click(object sender, EventArgs e)
         {
 			DrawCircleOnClick();
 		}
 
-		/// <summary>
-		/// Method that Draws Line on a click.
-		/// </summary>
-		private void ЛинияToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ЛинияToolStripMenuItem_Click(object sender, EventArgs e)
         {
 			DrawLineOnClick();
 		}
 
-		/// <summary>
-		/// Method that Draws Ellipse on a click.
-		/// </summary>
-		private void елипсаToolStripMenuItem_Click(object sender, EventArgs e)
+        private void елипсаToolStripMenuItem_Click(object sender, EventArgs e)
         {
 			DrawEllipseOnClick();
 		}
 
-		/// <summary>
-		/// Method that Draws Ellipse on a click.
-		/// </summary>
-		private void toolStripButton5_Click_1(object sender, EventArgs e)
+        private void toolStripButton5_Click_1(object sender, EventArgs e)
         {
 			DrawEllipseOnClick();
 		}
 
-		/// <summary>
-		/// Method that Draws Ellipse.
-		/// </summary>
 		private void DrawEllipseOnClick() 
 		{
 			dialogProcessor.AddEllipse();
@@ -193,10 +175,6 @@ namespace Draw
 			viewPort.Invalidate();
 		}
 
-
-		/// <summary>
-		/// Method that Draws Circle.
-		/// </summary>
 		private void DrawCircleOnClick() 
 		{
 			dialogProcessor.AddCircle();
@@ -206,10 +184,6 @@ namespace Draw
 			viewPort.Invalidate();
 		}
 
-
-		/// <summary>
-		/// Method that Draws Line.
-		/// </summary>
 		private void DrawLineOnClick()
         {
 			dialogProcessor.AddLine();
@@ -219,10 +193,6 @@ namespace Draw
 			viewPort.Invalidate();
 		}
 
-
-		/// <summary>
-		/// Method that Draws Rectangle.
-		/// </summary>
 		private void DrawRectangleOnClick()
         {
 			dialogProcessor.AddRandomRectangle();
@@ -231,41 +201,35 @@ namespace Draw
 
 			viewPort.Invalidate();
 
-			base.Invalidate();
+			base.Refresh();
 		}
 
-
-		/// <summary>
-		/// Method that changes the Fill color of the selected figure.
-		/// </summary>
-		private void ChangeFillColorOfFigure()
+		private void ChangeFillColorOfFigure(object sender, EventArgs e)
         {
 			if (colorDialog1.ShowDialog() == DialogResult.OK)
 			{
 				dialogProcessor.Selection.FillColor = colorDialog1.Color;
 
 				statusBar.Items[0].Text = "Последно действие: Цвета на фигурата е сменена";
+
+				viewPort.Invalidate();
 			}
-			viewPort.Invalidate();
+			base.Refresh();
 		}
 
-		/// <summary>
-		/// Method that changes the Stroke color of the selected figure.
-		/// </summary>
-		private void ChangeStrokeColorOfFigure()
+		private void ChangeStrokeColorOfFigure(object sender, EventArgs e)
         {
 			if (colorDialog1.ShowDialog() == DialogResult.OK)
 			{
 				dialogProcessor.Selection.StrokeColor = colorDialog1.Color;
 
 				statusBar.Items[0].Text = "Последно действие: Цвета на лиините на фигурата е сменена";
+
+				viewPort.Invalidate();
 			}
-			viewPort.Invalidate();
+			base.Refresh();
 		}
 
-		/// <summary>
-		/// Method that changes Randomly the Fill color of the selected figure.
-		/// </summary>
 		private void ChangeFillColorRandomly()
         {
 			Color randomColor = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
@@ -274,102 +238,74 @@ namespace Draw
 
 			dialogProcessor.Selection.FillColor = randomColor;
 
-			viewPort.Invalidate();
+			base.Refresh();
 		}
 
-
-		/// <summary>
-		/// Method that changes Randomly the Stroke color of the selected figure.
-		/// </summary>
 		private void ChangeStrokeColorRandomly()
 		{
 			Color randomColor = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+
 
 			statusBar.Items[0].Text = "Последно действие: Цвета на лиините на фигурата е случайно";
 
 			dialogProcessor.Selection.StrokeColor = randomColor;
 
-			base.Invalidate();
+			base.Refresh();
 		}
 
-
-
-		/// <summary>
-		/// Method that Deletes/Removes the chosen Figure.
-		/// </summary>
 		public void DeleteFigure()
 		{
 
 			dialogProcessor.ShapeList.Remove(dialogProcessor.Selection);
 
-			base.Invalidate();
+			base.Refresh();
 		}
 
-
-		/// <summary>
-		/// Method that changes Randomly the Fill color of the selected figure on Click.
-		/// </summary>
 		private void случаенЦвятНаЗапълванеToolStripMenuItem_Click(object sender, EventArgs e)
         {
 			ChangeFillColorRandomly();
 
 		}
 
-		/// <summary>
-		/// Method that changes Randomly the Stroke color of the selected figure on Click.
-		/// </summary>
-		private void слуаенЦвятНаЛиниитеToolStripMenuItem_Click(object sender, EventArgs e)
+        private void слуаенЦвятНаЛиниитеToolStripMenuItem_Click(object sender, EventArgs e)
         {
 			ChangeStrokeColorRandomly();
 		}
 
-		/// <summary>
-		/// Method that changes Randomly the Fill and Stroke color of the selected figure on Click.
-		/// </summary>
-		private void случайниЦветовеToolStripMenuItem_Click(object sender, EventArgs e)
+        private void случайниЦветовеToolStripMenuItem_Click(object sender, EventArgs e)
         {
 			ChangeFillColorRandomly();
 			ChangeStrokeColorRandomly();
 		}
 
-		/// <summary>
-		/// Method that changes Randomly the Fill color of the selected figure on Click.
-		/// </summary>
-		private void toolStripButton6_Click(object sender, EventArgs e)
+        private void toolStripButton6_Click(object sender, EventArgs e)
         {
 			ChangeFillColorRandomly();
 			ChangeStrokeColorRandomly();
 		}
 
-		/// <summary>
-		/// Method that changes the Fill color of the selected figure on Click.
-		/// </summary>
-		private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-			ChangeFillColorOfFigure();
+			ChangeFillColorOfFigure(sender, e);
 		}
 
-		/// <summary>
-		/// Method that changes the Stroke color of the selected figure on Click.
-		/// </summary>
-		private void копирайToolStripMenuItem_Click(object sender, EventArgs e)
+        private void копирайToolStripMenuItem_Click(object sender, EventArgs e)
         {
-			ChangeStrokeColorOfFigure();
+			ChangeStrokeColorOfFigure(sender, e);
 		}
-		private void MainForm_Load(object sender, EventArgs e) { }
+		private void MainForm_Load(object sender, EventArgs e)
+		{
+			
+		}
 
-		/// <summary>
-		/// Method that makes the Figgure Bigger on click.
-		/// </summary>
-		private void уголемиToolStripMenuItem_Click(object sender, EventArgs e)
+        private void уголемиToolStripMenuItem_Click(object sender, EventArgs e)
         {
 		   MakeFigureBigger();
 		}
 
-		/// <summary>
-		/// Method Saves the Drawing as a PNG, JPEG, JPG, BMP file.
-		/// </summary>
-		private void toolStripButton7_Click(object sender, EventArgs e)
+		//Save button
+        private void toolStripButton7_Click(object sender, EventArgs e)
         {
 
 			Bitmap bitmap = new Bitmap(base.Width, base.Height);
@@ -409,11 +345,11 @@ namespace Draw
 			statusBar.Items[0].Text = "Последно действие: Запис на изображение";
 		}
 
-		private void pictureBox1_Click(object sender, EventArgs e) { }
+		private void pictureBox1_Click(object sender, EventArgs e)
+        {
+			
+        }
 
-		/// <summary>
-		/// Method that makes the Selected Figure Bigger.
-		/// </summary>
 		private void MakeFigureBigger()
 		{
 			if (dialogProcessor.Selection != null)
@@ -421,12 +357,9 @@ namespace Draw
 				dialogProcessor.Selection.Width += 30;
 				dialogProcessor.Selection.Height += 30;
 			}
-			base.Invalidate();
+			base.Refresh();
 		}
 
-		/// <summary>
-		/// Method that makes the Selected Figure Smaller.
-		/// </summary>
 		private void MakeFigureSmaller()
 		{
 			if (dialogProcessor.Selection != null)
@@ -434,7 +367,7 @@ namespace Draw
 				dialogProcessor.Selection.Width -= 20;
 				dialogProcessor.Selection.Height -= 20;
 			}
-			base.Invalidate();
+			base.Refresh();
 		}
 
 		private void намаляванеToolStripMenuItem_Click(object sender, EventArgs e)
@@ -473,9 +406,6 @@ namespace Draw
 			toolStripButton7_Click(sender, e);
 		}
 
-		/// <summary>
-		/// Method that saves the Drawing as a PNG file.
-		/// </summary>
 		private void запишиToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			Bitmap bitmap = new Bitmap(base.Width, base.Height);
@@ -505,10 +435,8 @@ namespace Draw
 			statusBar.Items[0].Text = "Последно действие: Запис на изображение като .PNG";
 		}
 
-		/// <summary>
-		/// Method that changes the Background of the Drawing Board.
-		/// </summary>
-		private void toolStripButton8_Click(object sender, EventArgs e)
+		//Method that Reads and opens a file and uses it as a background
+        private void toolStripButton8_Click(object sender, EventArgs e)
         {
 
 			Form something = new Form();
@@ -524,10 +452,11 @@ namespace Draw
 
             }
 
-			statusBar.Items[0].Text = "Последно действие: Отвори изображение";
+			statusBar.Items[0].Text = "Последно действие: Отвори/Прочети изображение";
 
-			base.Invalidate();
+			base.Refresh();
 		}
+
 
         private void отвориToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -538,7 +467,7 @@ namespace Draw
         {
 			dialogProcessor.Selection.FillColor = base.BackColor;
 
-			base.Invalidate();
+			base.Refresh();
 		}
 
         private void транспаратноЗапълванеToolStripMenuItem_Click(object sender, EventArgs e)
@@ -546,10 +475,7 @@ namespace Draw
 			транспарантноЗапълванеToolStripMenuItem_Click(sender, e);
 		}
 
-		/// <summary>
-		/// Method that "Rotates" the Selected Figure.
-		/// </summary>
-		private void завъртанеToolStripMenuItem_Click(object sender, EventArgs e)
+        private void завъртанеToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
 			float figureWidth = dialogProcessor.Selection.Width;
@@ -560,40 +486,38 @@ namespace Draw
 
 			statusBar.Items[0].Text = "Последно действие: Завъртане на фигура";
 
-			base.Invalidate();
+			base.Refresh();
 		}
 
         private void завъртанеToolStripMenuItem1_Click(object sender, EventArgs e)
         {
 			завъртанеToolStripMenuItem_Click(sender, e);
+
 		}
 
         private void toolStripButton9_Click(object sender, EventArgs e)
         {
 			запишиToolStripMenuItem_Click(sender, e);
+
 		}
 
-		/// <summary>
-		/// Method that changes the Background Color of the Drawing Board.
-		/// </summary>
-		private void новToolStripMenuItem_Click(object sender, EventArgs e)
+        private void новToolStripMenuItem_Click(object sender, EventArgs e)
         {
 			if (colorDialog1.ShowDialog() == DialogResult.OK)
 			{
 				base.BackColor = colorDialog1.Color;
+
+				viewPort.Invalidate();
 			}
-
-			viewPort.Invalidate();
-
 			statusBar.Items[0].Text = "Последно действие: Цвета фона беше сменен";
 		}
 
-		private void pickUpSpeedButton_Click(object sender, EventArgs e) { }
+        private void pickUpSpeedButton_Click(object sender, EventArgs e)
+        {
 
-		/// <summary>
-		/// Method that Copys Selected Figure Coordinates and Creates Rectangle.
-		/// </summary>
-		private void копиранеНаПравоъгълникToolStripMenuItem_Click(object sender, EventArgs e)
+        }
+
+        private void копиранеНаПравоъгълникToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
 			int widthOfCopiedFigure = (int)dialogProcessor.Selection.Width;
@@ -609,18 +533,17 @@ namespace Draw
 
 			viewPort.Invalidate();
 
-			base.Invalidate();
+			base.Refresh();
 		}
 
         private void копирайПравоъгълникToolStripMenuItem_Click(object sender, EventArgs e)
         {
 			копиранеНаПравоъгълникToolStripMenuItem_Click(sender, e);
+
 		}
 
-		/// <summary>
-		/// Method that Copys Selected Figure Coordinates and Creates Circle.
-		/// </summary>
-		private void копиранеКатоКръгToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void копиранеКатоКръгToolStripMenuItem_Click(object sender, EventArgs e)
         {
 			int widthOfCopiedFigure = (int)dialogProcessor.Selection.Width;
 			int heightOfCopiedFigure = (int)dialogProcessor.Selection.Height;
@@ -635,7 +558,7 @@ namespace Draw
 
 			viewPort.Invalidate();
 
-			base.Invalidate();
+			base.Refresh();
 		}
 
         private void копирайКатоКръгToolStripMenuItem_Click(object sender, EventArgs e)
@@ -643,10 +566,7 @@ namespace Draw
 			копиранеКатоКръгToolStripMenuItem_Click(sender, e);
 		}
 
-		/// <summary>
-		/// Method that Copys Selected Figure Coordinates and Creates Ellipse.
-		/// </summary>
-		private void копиранеКатоЕлипсаToolStripMenuItem_Click(object sender, EventArgs e)
+        private void копиранеКатоЕлипсаToolStripMenuItem_Click(object sender, EventArgs e)
         {
 			int widthOfCopiedFigure = (int)dialogProcessor.Selection.Width;
 			int heightOfCopiedFigure = (int)dialogProcessor.Selection.Height;
@@ -661,19 +581,21 @@ namespace Draw
 
 			viewPort.Invalidate();
 
-			base.Invalidate();
+			base.Refresh();
 		}
 
         private void копирайКатоЕлипсаToolStripMenuItem_Click(object sender, EventArgs e)
         {
 			копиранеКатоЕлипсаToolStripMenuItem_Click(sender, e);
+
 		}
 
-		private void toolStripTextBox1_Click(object sender, EventArgs e) { }
-		/// <summary>
-		/// Method that gets as input Figure Name and Color and changes that figures color by its name.
-		/// </summary>
-		private void toolStripTextBox2_Click(object sender, EventArgs e)
+        private void toolStripTextBox1_Click(object sender, EventArgs e)
+        {
+		
+		}
+
+        private void toolStripTextBox2_Click(object sender, EventArgs e)
         {
 			string figureName = toolStripTextBox2.Text;
 
@@ -687,15 +609,15 @@ namespace Draw
 
 			dialogProcessor.ChangeColorByFigureName(figureName, color);
 
-			base.Invalidate();
+			base.Refresh();
 		}
 
-		private void именуванеНаФигуратаToolStripMenuItem_Click(object sender, EventArgs e) { }
+        private void именуванеНаФигуратаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
 
-		/// <summary>
-		/// Method that Selects a Figure by its name.
-		/// </summary>
-		private void избериЧрезToolStripMenuItem_Click(object sender, EventArgs e)
+		}
+
+        private void избериЧрезToolStripMenuItem_Click(object sender, EventArgs e)
         {
 			string input = имеНаФигураToolStripMenuItem.Text;
 
@@ -707,25 +629,29 @@ namespace Draw
 			}
 		}
 
-		private void имеНаФигураToolStripMenuItem_Click(object sender, EventArgs e) { }
+        private void имеНаФигураToolStripMenuItem_Click(object sender, EventArgs e)
+		{ 
+
+		}
+		
 
 		private void toolStripButton10_Click(object sender, EventArgs e)
         {
 			dialogProcessor.Save();
-
 			base.Invalidate();
-
 			statusBar.Items[0].Text = "Последно действие: Сериализация";
 		}
 
-		private void toolStripButton11_Click(object sender, EventArgs e) { }
+        private void toolStripButton11_Click(object sender, EventArgs e)
+        {
+
+	
+		}
 
         private void toolStripButton11_Click_1(object sender, EventArgs e)
         {
 			dialogProcessor.Load();
-
 			base.Invalidate();
-
 			statusBar.Items[0].Text = "Последно действие: Десериализация";
 		}
 
@@ -737,58 +663,54 @@ namespace Draw
 
 			viewPort.Invalidate();
 
-			base.Invalidate();
+			base.Refresh();
 		}
 
-		private void промениГрупатаToolStripMenuItem_Click(object sender, EventArgs e) { }
+        private void промениГрупатаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
 
-		/// <summary>
-		/// Method that Changes the Color of a Given Group
-		/// </summary>
-		private void смениЦветаНаГрупаRToolStripMenuItem_Click(object sender, EventArgs e)
+		}
+
+        private void смениЦветаНаГрупаRToolStripMenuItem_Click(object sender, EventArgs e)
         {
 			if (colorDialog1.ShowDialog() == DialogResult.OK)
 			{
 				Color color = colorDialog1.Color;
-				dialogProcessor.ChangeColorOfGroup(color, "A");
+				dialogProcessor.ChangeColorOfGroupA(color);
 			}
 
 			base.Invalidate();
 		}
 
-		/// <summary>
-		/// Method that Changes the Color of a Given Group
-		/// </summary>
-		private void смениЦветаНаГрупаCToolStripMenuItem_Click(object sender, EventArgs e)
+        private void смениЦветаНаГрупаCToolStripMenuItem_Click(object sender, EventArgs e)
         {
 			if (colorDialog1.ShowDialog() == DialogResult.OK)
 			{
 				Color color = colorDialog1.Color;
-				dialogProcessor.ChangeColorOfGroup(color, "B");
+				dialogProcessor.ChangeColorOfGroupB(color);
 			}
 
 			base.Invalidate();
 		}
 
-		private void смениЦветаНаДругаГрупаToolStripMenuItem_Click(object sender, EventArgs e) { }
+        private void смениЦветаНаДругаГрупаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+		}
 
-		/// <summary>
-		/// Method that Deletes Given Group
-		/// </summary>
-		private void премахниОтГрупатаToolStripMenuItem_Click(object sender, EventArgs e)
+        private void премахниОтГрупатаToolStripMenuItem_Click(object sender, EventArgs e)
         {
 			dialogProcessor.Selection.Group = "no";
         }
 
-		/// <summary>
-		/// Method that Opens the GitHub Repostiory of the Project
-		/// </summary>
-		private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
 			System.Diagnostics.Process.Start("https://github.com/erkan9/pu-computer-graphics-project");
 		}
 
-		private void завъртанеНаГрупаToolStripMenuItem_Click(object sender, EventArgs e) { }
+        private void завъртанеНаГрупаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+		}
 
         private void увеToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -811,29 +733,28 @@ namespace Draw
         private void групаToolStripMenuItem1_Click(object sender, EventArgs e)
         {
 			string groupName = групаToolStripMenuItem1.Text;
-
 			dialogProcessor.DeleteGroup(groupName);
-
 			base.Invalidate();
 		}
 
-		private void изтриванеНаГрупаToolStripMenuItem_Click(object sender, EventArgs e) { }
-		/// <summary>
-		/// Method that Changes Selected Figure's Group
-		/// </summary>
-		private void групаToolStripMenuItem2_Click(object sender, EventArgs e)
+        private void изтриванеНаГрупаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void групаToolStripMenuItem2_Click(object sender, EventArgs e)
         {
 			dialogProcessor.Selection.Group = групаToolStripMenuItem2.Text;
 
 			statusBar.Items[0].Text = "Последно действие: Групата на фигурата е променена на: " + групаToolStripMenuItem2;
 		}
 
-		private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e) { }
+        private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
 
-		/// <summary>
-		/// Method that Changes Selected Figure's Name
-		/// </summary>
-		private void имеToolStripMenuItem_Click(object sender, EventArgs e)
+        }
+
+        private void имеToolStripMenuItem_Click(object sender, EventArgs e)
         {
 			string input = имеToolStripMenuItem.Text;
 

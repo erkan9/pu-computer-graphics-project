@@ -1,5 +1,4 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
@@ -7,35 +6,33 @@ using System.Drawing.Drawing2D;
 namespace Draw
 {
 	/// <summary>
-	/// Класът, който ще бъде използван при управляване на дисплейната система.
+	/// Class that is used to control the Display System
 	/// </summary>
 	public class DisplayProcessor
 	{
 		#region Constructor
 		
-		public DisplayProcessor()
-		{
-		}
-		
+		public DisplayProcessor() { }
+
 		#endregion
-		
+
 		#region Properties
-		
+
 		/// <summary>
-		/// Списък с всички елементи формиращи изображението.
+		/// List of all the Shapes that create an Image/Picture/Drawing
 		/// </summary>
 		private List<Shape> shapeList = new List<Shape>();		
 		public List<Shape> ShapeList {
 			get { return shapeList; }
 			set { shapeList = value; }
 		}
-		
+
 		#endregion
-		
+
 		#region Drawing
-		
+
 		/// <summary>
-		/// Прерисува всички елементи в shapeList върху e.Graphics
+		/// Method that draws all the Shapes in ShapeList over the e.Graphics
 		/// </summary>
 		public void ReDraw(object sender, PaintEventArgs e)
 		{
@@ -44,22 +41,22 @@ namespace Draw
 		}
 		
 		/// <summary>
-		/// Визуализация.
-		/// Обхождане на всички елементи в списъка и извикване на визуализиращия им метод.
+		/// Method that Loads all the Shapes in the ShapeList and calls their Draw method
 		/// </summary>
-		/// <param name="grfx">Къде да се извърши визуализацията.</param>
+		/// <param name="grfx">Where the visualisations are done</param>
 		public virtual void Draw(Graphics grfx)
 		{
-			foreach (Shape item in ShapeList){
+			foreach (Shape item in ShapeList)
+			{
 				DrawShape(grfx, item);
 			}
 		}
-		
+
 		/// <summary>
-		/// Визуализира даден елемент от изображението.
+		/// Method that visualises a specific element.
 		/// </summary>
-		/// <param name="grfx">Къде да се извърши визуализацията.</param>
-		/// <param name="item">Елемент за визуализиране.</param>
+		/// <param name="grfx">Where the visualisations are done.</param>
+		/// <param name="item">The element/Shape for visualisation.</param>
 		public virtual void DrawShape(Graphics grfx, Shape item)
 		{
 			item.DrawSelf(grfx);

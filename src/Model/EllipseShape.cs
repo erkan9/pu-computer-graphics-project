@@ -3,38 +3,39 @@ using System.Drawing;
 
 namespace Draw
 {
-	/// <summary>
-	/// Класът правоъгълник е основен примитив, който е наследник на базовия Shape.
-	/// </summary>
+
 	[Serializable]
 	public class EllipseShape : Shape
 	{
 		#region Constructor
 
-		public EllipseShape(RectangleF rect) : base(rect)
-		{
-		}
+		public EllipseShape(RectangleF rect) : base(rect) { }
 
-		public EllipseShape(CircleShape rectangle) : base(rectangle)
-		{
-		}
+		public EllipseShape(CircleShape rectangle) : base(rectangle) { }
 
 		#endregion
 
-		//Method that calls containsEllipse method that checks if "Mouse" points X, Y are inside the figure Cirche
-		public override bool Contains(PointF point)
+		/// <summary>
+		/// Method that checks if the Clicked location as X, Y is in the Ellipse.
+		/// </summary>
+		public virtual bool ContainsEllipse(PointF point)
 		{
-			if (base.ContainsEllipse(point))
 
+			Boolean isInsideFigureCalculate = ((point.X - 75) - Rectangle.X) * ((point.X - 60) - Rectangle.X) + ((point.Y - 100) -
+				Rectangle.Y) * ((point.Y - 100) - Rectangle.Y) <= 40 * 170;
+
+			if (isInsideFigureCalculate)
+			{
 				return true;
+			}
 			else
+			{
 				return false;
+			}
 		}
 
-
-
 		/// <summary>
-		/// Частта, визуализираща конкретния примитив.
+		/// Method that Draws the Figure.
 		/// </summary>
 		public override void DrawSelf(Graphics grfx)
 		{

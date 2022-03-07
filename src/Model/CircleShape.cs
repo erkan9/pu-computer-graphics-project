@@ -3,40 +3,44 @@ using System.Drawing;
 
 namespace Draw
 {
-	/// <summary>
-	/// Класът правоъгълник е основен примитив, който е наследник на базовия Shape.
-	/// </summary>
+
 	[Serializable]
 	public class CircleShape : Shape
 	{
 		#region Constructor
 
-		public CircleShape(RectangleF rect) : base(rect)
-		{
-		}
+		public CircleShape(RectangleF rect) : base(rect) {}
 
-		public CircleShape(CircleShape rectangle) : base(rectangle)
-		{
-		}
+		public CircleShape(CircleShape rectangle) : base(rectangle) {}
 
 		#endregion
 
-	
-
-		//Method that calls ContainsCircle method that checks if "Mouse" points X, Y are inside the figure Cirche
-		public override bool Contains(PointF point)
+		/// <summary>
+		/// Method that checks if the Clicked location as X, Y is in the Circle.
+		/// </summary>
+		public virtual bool ContainsCircle(PointF point)
 		{
-			if (base.ContainsCircle(point))
-				
+			int offSet = 50;
+
+			bool isInsideFigureCalculator = ((point.X - offSet) - Rectangle.X) * ((point.X - offSet) - Rectangle.X) + ((point.Y - offSet) -
+				Rectangle.Y) * ((point.Y - offSet) - Rectangle.Y) <= 50 * 50;
+
+			if (isInsideFigureCalculator)
+			{
+				Console.WriteLine("The cursor is inside the Figure");
+
 				return true;
+			}
 			else
+			{
+				Console.WriteLine("The cursor is NOT inside the Figure");
+
 				return false;
+			}
 		}
 
-
-
 		/// <summary>
-		/// Частта, визуализираща конкретния примитив.
+		/// Method that Draws the Figure.
 		/// </summary>
 		public override void DrawSelf(Graphics grfx)
 		{

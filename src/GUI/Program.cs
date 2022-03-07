@@ -4,18 +4,20 @@ using System.Windows.Forms;
 namespace Draw
 {
 	/// <summary>
-	/// Клас с входната точка на програмата.
+	/// Class with the entry point of the program.
 	/// </summary>
 	internal sealed class Program
 	{
 		/// <summary>
-		/// Входна точка. Създава и показва главната форма на програмата.
+		/// Entry point. Creates and displays the main form of the program.
 		/// </summary>
 		[STAThread]
 		private static void Main(string[] args)
 		{
 			Application.EnableVisualStyles();
+
 			Application.SetCompatibleTextRenderingDefault(false);
+
 			Application.Run(new MainForm());
 		}
 		
