@@ -861,23 +861,5 @@ namespace Draw
 			}
 			base.Invalidate();
 		}
-
-        private void запишиМоделаToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-			dialogProcessor.Save();
-
-			base.Invalidate();
-
-			statusBar.Items[0].Text = "Последно действие: Сериализация";
-		}
-
-        private void отвориМоделToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-			dialogProcessor.Load();
-
-			base.Invalidate();
-
-			statusBar.Items[0].Text = "Последно действие: Десериализация";
-		}
     }
 }
