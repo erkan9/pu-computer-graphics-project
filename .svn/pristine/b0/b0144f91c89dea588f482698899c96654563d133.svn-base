@@ -44,7 +44,6 @@ namespace Draw
 		void ViewPortPaint(object sender, PaintEventArgs e)
 		{
 			dialogProcessor.ReDraw(sender, e);
-			//dialogProcessor.Show(e);	
 		}
 		
 		/// <summary>
@@ -782,5 +781,7 @@ namespace Draw
 			}
 			base.Invalidate();
 		}
+
+
     }
 }

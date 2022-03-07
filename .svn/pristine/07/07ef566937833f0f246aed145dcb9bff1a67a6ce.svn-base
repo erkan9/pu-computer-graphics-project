@@ -10,7 +10,7 @@ namespace Draw
 	public abstract class Shape
 	{
 		#region Constructors
-
+		
 		public Shape()
 		{
 		}

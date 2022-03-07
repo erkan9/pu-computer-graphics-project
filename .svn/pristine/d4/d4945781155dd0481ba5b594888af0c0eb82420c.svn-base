@@ -9,18 +9,18 @@ namespace Draw
 	/// </summary>
 
 	[Serializable]
-	public class RectangleWithLineShape : Shape
+	public class RectangleShape : Shape
 	{
 		#region Constructor
-
-		public RectangleWithLineShape(RectangleF rect) : base(rect)
+		
+		public RectangleShape(RectangleF rect) : base(rect)
 		{
 		}
-
-		public RectangleWithLineShape(RectangleShape rectangle) : base(rectangle)
+		
+		public RectangleShape(RectangleShape rectangle) : base(rectangle)
 		{
 		}
-
+		
 		#endregion
 
 		/// <summary>
@@ -40,7 +40,7 @@ namespace Draw
 				// Ако не е в обхващащия правоъгълник, то неможе да е в обекта и => false
 				return false;
 		}
-
+		
 		/// <summary>
 		/// Частта, визуализираща конкретния примитив.
 		/// </summary>
@@ -50,10 +50,8 @@ namespace Draw
 
 			Pen greenPen = new Pen(Color.FromArgb(255, 0, 255, 0), 10);
 
-			grfx.FillRectangle(new SolidBrush(FillColor), Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
+			grfx.FillRectangle(new SolidBrush(FillColor),Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
 			grfx.DrawRectangle(new Pen(StrokeColor), Rectangle.X, Rectangle.Y, Rectangle.Width, Rectangle.Height);
-
-			grfx.DrawLine(Pens.Black, Rectangle.Right, Rectangle.Top, Rectangle.Left, Rectangle.Bottom);
 		}
 	}
 }

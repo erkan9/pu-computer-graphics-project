@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -84,10 +83,6 @@ namespace Draw
 				fileStream = File.OpenRead(path);
 
 				obj = formatter.Deserialize(fileStream);
-
-				 var res = (List<Shape>)obj;
-				res.ForEach(S => ShapeList.Add(S));
-
 				fileStream.Close();
             }
 		}
